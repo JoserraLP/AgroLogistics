@@ -1,0 +1,2313 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: agrologistics.uex@gmail.com
+    name: AgroLogistics
+    url: http://spilab.es/
+  description: API for AgroLogistics project of Catedra Telefonica UEX 2022
+  termsOfService: http://spilab.es/
+  title: AgroLogistics
+  version: "1.0"
+servers:
+- url: /
+- url: https://raw.githubusercontent.com/
+paths:
+  /product:
+    delete:
+      description: Delete product item
+      operationId: deleteProduct
+      parameters:
+      - description: Product ID
+        explode: true
+        in: query
+        name: productID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete product item
+      tags:
+      - Product
+      x-swagger-router-controller: Product
+    get:
+      description: Returns all the products
+      operationId: getProducts
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1","name":"Patata"}]'
+                title: Info
+                type: string
+          description: Product example
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the products
+      tags:
+      - Product
+      x-swagger-router-controller: Product
+    post:
+      description: Creates new product
+      operationId: postProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new product
+      tags:
+      - Product
+      x-swagger-router-controller: Product
+    put:
+      description: Modifies a product
+      operationId: putProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a product
+      tags:
+      - Product
+      x-swagger-router-controller: Product
+  /product/{id}:
+    get:
+      description: Get one product
+      operationId: getProduct
+      parameters:
+      - description: ID of the product to get information
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '{"id":"1","name":"Patata"}'
+                title: Info
+                type: string
+          description: Product example
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Get one product's information
+      tags:
+      - Product
+      x-swagger-router-controller: Product
+  /logistic_center:
+    delete:
+      description: Delete logistic center
+      operationId: deleteLogisticCenter
+      parameters:
+      - description: Logistic center ID
+        explode: true
+        in: query
+        name: logisticCenterID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete product item
+      tags:
+      - LogisticCenter
+      x-swagger-router-controller: LogisticCenter
+    get:
+      description: Returns all the logistic centers
+      operationId: getLogisticCenters
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1","name":"Patata", "capacity_kg": 1000, "cooled_capacity_kg":
+                  200}]'
+                title: Info
+                type: string
+          description: Logistic center example
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the logistics centers
+      tags:
+      - LogisticCenter
+      x-swagger-router-controller: LogisticCenter
+    post:
+      description: Creates new logistic center
+      operationId: postLogisticCenter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogisticCenter'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new logistic center
+      tags:
+      - LogisticCenter
+      x-swagger-router-controller: LogisticCenter
+    put:
+      description: Modifies a logistic center
+      operationId: putLogisticCenter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogisticCenter'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a logistic center
+      tags:
+      - LogisticCenter
+      x-swagger-router-controller: LogisticCenter
+  /logistic_center/{id}:
+    get:
+      description: Get one logistic center
+      operationId: getLogisticCenter
+      parameters:
+      - description: ID of the logistic center to get information
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '{"id":"1","name":"Patata", "capacity_kg": 1000, "cooled_capacity_kg":
+                  200}'
+                title: Info
+                type: string
+          description: Logistic center example
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Get one logistic center's information
+      tags:
+      - LogisticCenter
+      x-swagger-router-controller: LogisticCenter
+  /producer:
+    delete:
+      description: Delete producer
+      operationId: deleteProducer
+      parameters:
+      - description: Producer ID
+        explode: true
+        in: query
+        name: producerID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete producer
+      tags:
+      - Producer
+      x-swagger-router-controller: Producer
+    get:
+      description: Returns all the producers
+      operationId: getProducers
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1","name":"Farmer Lopez"}]'
+                title: Info
+                type: string
+          description: Producer example
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the producers
+      tags:
+      - Producer
+      x-swagger-router-controller: Producer
+    post:
+      description: Creates new producer
+      operationId: postProducer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new producer
+      tags:
+      - Producer
+      x-swagger-router-controller: Producer
+    put:
+      description: Modifies a producer
+      operationId: putProducer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a producer
+      tags:
+      - Producer
+      x-swagger-router-controller: Producer
+  /producer/{id}:
+    get:
+      description: Get one producer
+      operationId: getProducer
+      parameters:
+      - description: ID of the producer to get information
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1","name":"Farmer Lopez"}]'
+                title: Info
+                type: string
+          description: Producer example
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Get one producer's information
+      tags:
+      - Producer
+      x-swagger-router-controller: Producer
+  /consumer:
+    delete:
+      description: Delete consumer
+      operationId: deleteConsumer
+      parameters:
+      - description: Consumer ID
+        explode: true
+        in: query
+        name: consumerID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete consumer
+      tags:
+      - Consumer
+      x-swagger-router-controller: Consumer
+    get:
+      description: Returns all the consumers
+      operationId: getConsumers
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1","name":"Caceres Greengrocer"}]'
+                title: Info
+                type: string
+          description: Consumer example
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the consumers
+      tags:
+      - Consumer
+      x-swagger-router-controller: Consumer
+    post:
+      description: Creates new consumer
+      operationId: postConsumer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consumer'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new consumer
+      tags:
+      - Consumer
+      x-swagger-router-controller: Consumer
+    put:
+      description: Modifies a consumer
+      operationId: putConsumer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consumer'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a consumer
+      tags:
+      - Consumer
+      x-swagger-router-controller: Consumer
+  /consumer/{id}:
+    get:
+      description: Get one consumer
+      operationId: getConsumer
+      parameters:
+      - description: ID of the consumer to get information
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '{"id":"1","name":"Caceres Greengrocer"}'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Get one consumer's information
+      tags:
+      - Consumer
+      x-swagger-router-controller: Consumer
+  /producer_event:
+    delete:
+      description: Delete producer event
+      operationId: deleteProducerEvent
+      parameters:
+      - description: Producer event ID
+        explode: true
+        in: query
+        name: producerEventID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete producer event
+      tags:
+      - ProducerEvent
+      x-swagger-router-controller: ProducerEvent
+    get:
+      description: Returns all the producer events
+      operationId: getProducerEvents
+      parameters:
+      - description: Day
+        explode: true
+        in: query
+        name: day
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Month
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Year
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1",
+                  "productor_id": "1", "product_category": "high_quality", "amount_kg":
+                  "1000", "date": "2022-03-10 10:00:00", "price": 10, "storage_type": "automatic"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the producer events
+      tags:
+      - ProducerEvent
+      x-swagger-router-controller: ProducerEvent
+    post:
+      description: Creates new producer event
+      operationId: postProducerEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerEvent'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new producer event
+      tags:
+      - ProducerEvent
+      x-swagger-router-controller: ProducerEvent
+    put:
+      description: Modifies a producer event
+      operationId: putProducerEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerEvent'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a producer event
+      tags:
+      - ProducerEvent
+      x-swagger-router-controller: ProducerEvent
+  /producer_transaction:
+    delete:
+      description: Delete producer transaction
+      operationId: deleteProducerTransaction
+      parameters:
+      - description: Producer transaction ID
+        explode: true
+        in: query
+        name: producerTransactionID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete producer transaction
+      tags:
+      - ProducerTransaction
+      x-swagger-router-controller: ProducerTransaction
+    get:
+      description: Returns all the producer transaction
+      operationId: getProducerTransactions
+      parameters:
+      - description: Day
+        explode: true
+        in: query
+        name: day
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Month
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Year
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1",
+                  "productor_id": "1", "product_category": "high_quality", "amount_kg":
+                  "100", "date": "2022-03-10 10:00:00", "price": 10, "storage_type": "automatic"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the producer transaction
+      tags:
+      - ProducerTransaction
+      x-swagger-router-controller: ProducerTransaction
+    post:
+      description: Creates new producer transaction
+      operationId: postProducerTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerTransaction'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new producer transaction
+      tags:
+      - ProducerTransaction
+      x-swagger-router-controller: ProducerTransaction
+    put:
+      description: Modifies a producer transaction
+      operationId: putProducerTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerTransaction'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a producer transaction
+      tags:
+      - ProducerTransaction
+      x-swagger-router-controller: ProducerTransaction
+  /consumer_event:
+    delete:
+      description: Delete consumer event
+      operationId: deleteConsumerEvent
+      parameters:
+      - description: Consumer event ID
+        explode: true
+        in: query
+        name: consumerEventID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete consumer event
+      tags:
+      - ConsumerEvent
+      x-swagger-router-controller: ConsumerEvent
+    get:
+      description: Returns all the consumer events
+      operationId: getConsumerEvents
+      parameters:
+      - description: Day
+        explode: true
+        in: query
+        name: day
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Month
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Year
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1",
+                  "consumer_id": "1", "product_category": "high_quality", "amount_kg":
+                  "1000", "date": "2022-03-10 10:00:00", "price": 10, "storage_type": "automatic"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the consumer events
+      tags:
+      - ConsumerEvent
+      x-swagger-router-controller: ConsumerEvent
+    post:
+      description: Creates new consumer event
+      operationId: postConsumerEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerEvent'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new consumer event
+      tags:
+      - ConsumerEvent
+      x-swagger-router-controller: ConsumerEvent
+    put:
+      description: Modifies a consumer event
+      operationId: putConsumerEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerEvent'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a consumer event
+      tags:
+      - ConsumerEvent
+      x-swagger-router-controller: ConsumerEvent
+  /consumer_transaction:
+    delete:
+      description: Delete consumer transaction
+      operationId: deleteConsumerTransaction
+      parameters:
+      - description: Consumer transaction ID
+        explode: true
+        in: query
+        name: ConsumerTransactionID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete consumer transaction
+      tags:
+      - ConsumerTransaction
+      x-swagger-router-controller: ConsumerTransaction
+    get:
+      description: Returns all the consumer transaction
+      operationId: getConsumerTransactions
+      parameters:
+      - description: Day
+        explode: true
+        in: query
+        name: day
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Month
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Year
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1",
+                  "consumer_id": "1", "product_category": "high_quality", "amount_kg":
+                  "100", "date": "2022-03-10 10:00:00", "price": 10, "storage_type": "automatic"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns all the consumer transaction
+      tags:
+      - ConsumerTransaction
+      x-swagger-router-controller: ConsumerTransaction
+    post:
+      description: Creates new consumer transaction
+      operationId: postConsumerTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerTransaction'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new consumer transaction
+      tags:
+      - ConsumerTransaction
+      x-swagger-router-controller: ConsumerTransaction
+    put:
+      description: Modifies a consumer transaction
+      operationId: putConsumerTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerTransaction'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies a consumer transaction
+      tags:
+      - ConsumerTransaction
+      x-swagger-router-controller: ConsumerTransaction
+  /actual_stock:
+    delete:
+      description: Delete actual stock item
+      operationId: deleteActualStock
+      parameters:
+      - description: Actual Stock ID
+        explode: true
+        in: query
+        name: ActualStockID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete actual stock item
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+    get:
+      description: Returns the actual stock of a given date
+      operationId: getActualStock
+      parameters:
+      - description: Day
+        explode: true
+        in: query
+        name: day
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Month
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Year
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1",
+                  "product_category": "high_quality", "amount_kg": "100", "date":
+                  "2022-03-10 10:00:00"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns actual stock items
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+    post:
+      description: Creates new actual stock item
+      operationId: postActualStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActualStock'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new actual stock item
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+    put:
+      description: Modifies a actual stock item
+      operationId: putActualStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActualStock'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies an actual stock item
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+  /estimated_stock:
+    delete:
+      description: Delete estimated stock item
+      operationId: deleteEstimatedStock
+      parameters:
+      - description: Estimated Stock ID
+        explode: true
+        in: query
+        name: EstimatedStockID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Delete estimated stock item
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+    get:
+      description: Returns the estimated stock of a given date
+      operationId: getEstimatedStock
+      parameters:
+      - description: Day
+        explode: true
+        in: query
+        name: day
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Month
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Year
+        explode: true
+        in: query
+        name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1",
+                  "product_category": "high_quality", "amount_kg": "1000", "date":
+                  "2022-03-10 10:00:00"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Returns estimated stock items
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+    post:
+      description: Creates new estimated stock item
+      operationId: postEstimatedStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimatedStock'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Creates new estimated stock item
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+    put:
+      description: Modifies a estimated stock item
+      operationId: putEstimatedStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimatedStock'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created/Updated/Deleted
+                title: Created/Updated/Deleted
+                type: string
+          description: Created/Updated/Deleted
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifies an estimated stock item
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+components:
+  responses:
+    201:
+      content:
+        text/plain:
+          schema:
+            example: Created/Updated/Deleted
+            title: Created/Updated/Deleted
+            type: string
+      description: Created/Updated/Deleted
+    404:
+      content:
+        text/plain:
+          schema:
+            example: Not found
+            title: Endpoint not found
+            type: string
+      description: Not found response
+    405:
+      content:
+        text/plain:
+          schema:
+            example: The format is not valid
+            title: Invalid input
+            type: string
+      description: Invalid input
+  schemas:
+    Product:
+      example:
+        id: 1
+        name: Patata
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        name:
+          example: Patata
+          type: string
+      type: object
+    LogisticCenter:
+      example:
+        id: 1
+        name: Caceres Logistic Center
+        capacity_kg: 10000
+        cooled_capacity_kg: 20000
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        name:
+          example: Caceres Logistic Center
+          type: string
+        capacity_kg:
+          example: 10000
+          format: int64
+          type: integer
+        cooled_capacity_kg:
+          example: 10000
+          format: int64
+          type: integer
+      type: object
+    Producer:
+      example:
+        id: 1
+        name: Farmer Lopez
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        name:
+          example: Farmer Lopez
+          type: string
+      type: object
+    Consumer:
+      example:
+        id: 1
+        name: Caceres Greengrocer
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        name:
+          example: Caceres Greengrocer
+          type: string
+      type: object
+    ProducerEvent:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        productor_id: 1
+        product_category: high_quality
+        amount_kg: 1000
+        date: "2022-03-10 10:00:00"
+        price: 10
+        storage_type: automatic
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        productor_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: high_quality
+          type: string
+        amount_kg:
+          example: 1000
+          type: number
+        date:
+          example: "2022-03-10 10:00:00"
+          type: string
+        price:
+          example: 10
+          type: number
+        storage_type:
+          example: automatic
+          type: string
+      type: object
+    ProducerTransaction:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        productor_id: 1
+        product_category: high_quality
+        amount_kg: 100
+        date: "2022-03-10 10:00:00"
+        price: 10
+        storage_type: automatic
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        productor_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: high_quality
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: "2022-03-10 10:00:00"
+          type: string
+        price:
+          example: 10
+          type: number
+        storage_type:
+          example: automatic
+          type: string
+      type: object
+    ConsumerEvent:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        consumer_id: 1
+        product_category: high_quality
+        amount_kg: 1000
+        date: "2022-03-10 10:00:00"
+        price: 10
+        storage_type: automatic
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        consumer_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: high_quality
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: "2022-03-10 10:00:00"
+          type: string
+        price:
+          example: 10
+          type: number
+        storage_type:
+          example: automatic
+          type: string
+      type: object
+    ConsumerTransaction:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        consumer_id: 1
+        product_category: high_quality
+        amount_kg: 100
+        date: "2022-03-10 10:00:00"
+        price: 10
+        storage_type: automatic
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        consumer_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: high_quality
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: "2022-03-10 10:00:00"
+          type: string
+        price:
+          example: 10
+          type: number
+        storage_type:
+          example: automatic
+          type: string
+      type: object
+    ActualStock:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        product_category: high_quality
+        amount_kg: 100
+        date: "2022-03-10 10:00:00"
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: high_quality
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: "2022-03-10 10:00:00"
+          type: string
+      type: object
+    EstimatedStock:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        product_category: high_quality
+        amount_kg: 1000
+        date: "2022-03-10 10:00:00"
+      properties: 
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: high_quality
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: "2022-03-10 10:00:00"
+          type: string
+      type: object
