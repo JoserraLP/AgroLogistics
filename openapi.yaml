@@ -368,7 +368,6 @@ paths:
           $ref: '#/components/responses/404'
         405:
           $ref: '#/components/responses/405'
-          description: Not found response
       summary: Get one producer's information
       tags:
       - Producer
@@ -906,6 +905,212 @@ paths:
       tags:
       - ConsumerTransaction
       x-swagger-router-controller: ConsumerTransaction
+  /actual_stock:
+    delete:
+      description: Delete actual stock item
+      operationId: deleteActualStock
+      parameters:
+      - description: Actual Stock ID
+        explode: true
+        in: query
+        name: ActualStockID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Delete actual stock item
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+    get:
+      description: Returns the actual stock of a given date
+      operationId: getActualStock
+      parameters:
+       - in: query
+         name: day
+         schema:
+           type: integer
+         description: Day
+       - in: query
+         name: month
+         schema:
+           type: integer
+         description: Month
+       - in: query
+         name: year
+         schema:
+           type: integer
+         description: Year
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1", "product_category": "high_quality", "amount_kg": "100", "date": "10/03/2022"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Returns actual stock items
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+    post:
+      description: Creates new actual stock item
+      operationId: postActualStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActualStock'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Creates new actual stock item
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+    put:
+      description: Modifies a actual stock item
+      operationId: putActualStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActualStock'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Modifies an actual stock item
+      tags:
+      - ActualStock
+      x-swagger-router-controller: ActualStock
+  /estimated_stock:
+    delete:
+      description: Delete estimated stock item
+      operationId: deleteEstimatedStock
+      parameters:
+      - description: Estimated Stock ID
+        explode: true
+        in: query
+        name: EstimatedStockID
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Delete estimated stock item
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+    get:
+      description: Returns the estimated stock of a given date
+      operationId: getEstimatedStock
+      parameters:
+       - in: query
+         name: day
+         schema:
+           type: integer
+         description: Day
+       - in: query
+         name: month
+         schema:
+           type: integer
+         description: Month
+       - in: query
+         name: year
+         schema:
+           type: integer
+         description: Year
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                example: '[{"id":"1", "product_id": "1", "logistic_center_id": "1", "product_category": "high_quality", "amount_kg": "1000", "date": "10/03/2022"}]'
+                title: Info
+                type: string
+          description: OK
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Returns estimated stock items
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+    post:
+      description: Creates new estimated stock item
+      operationId: postEstimatedStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimatedStock'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Creates new estimated stock item
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
+    put:
+      description: Modifies a estimated stock item
+      operationId: putEstimatedStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimatedStock'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/201'
+        404:
+          $ref: '#/components/responses/404'
+        405:
+          $ref: '#/components/responses/405'
+      summary: Modifies an estimated stock item
+      tags:
+      - EstimatedStock
+      x-swagger-router-controller: EstimatedStock
 components:
   responses:
     201:
@@ -1176,5 +1381,69 @@ components:
           type: number
         storage_type:
           example: 'automatic'
+          type: string
+      type: object
+    
+    ActualStock:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        product_category: 'high_quality'
+        amount_kg: 100
+        date: '10/03/2022'
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: 'high_quality'
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: '10/03/2022'
+          type: string
+      type: object
+    
+    EstimatedStock:
+      example:
+        id: 1
+        product_id: 1
+        logistic_center_id: 1
+        product_category: 'high_quality'
+        amount_kg: 1000
+        date: '10/03/2022'
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        product_id:
+          example: 1
+          format: int64
+          type: integer
+        logistic_center_id:
+          example: 1
+          format: int64
+          type: integer
+        product_category:
+          example: 'high_quality'
+          type: string
+        amount_kg:
+          example: 100
+          type: number
+        date:
+          example: '10/03/2022'
           type: string
       type: object
