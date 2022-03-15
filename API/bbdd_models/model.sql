@@ -1,3 +1,5 @@
+CREATE DATABASE agrologistics;
+
 USE agrologistics;
 
 CREATE TABLE product (
