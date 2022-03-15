@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="p-2 mt-5">
+        
+    {% set months = [['Jan','January'], ['Feb','February'], ['Mar','March'], ['Apr','April'], ['May','May'], ['Jun','June'], ['Jul','July'], ['Aug','August'], ['Sep','September'], ['Oct','October'], ['Nov','November'], ['Dec','December']] %}
+    {% for month_row in months | batch(6, '&nbsp;') %}
+    <div class="row">
+        {% for month_num, month_name in month_row %}
+        <div class="col bg-gray mt-3 mb-3 ml-5 mr-5 p-2">
+            <form action="/schedule" method="POST">
+                <input type="hidden" name="month" value={{month_num}}>
+                <button class="btn btn-dark" type="submit" {% if month == month_num %} autofocus {% endif %}>{{month_num}}</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    </div>
+</div>
+
+<div class="p-2 mt-5">
+    {% set week_addr = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] %}        
+    <h4 class="text-center">{{month}}</h4>
+    <table class="table table-bordered">
+        <tr>
+            {% for addr in week_addr %}
+                <th>{{addr}}</th>
+            {% endfor %}
+        </tr>
+        {% for weeks in calendar %}
+        <tr>
+            {% for day in weeks %}
+                {% if day == 0 %}
+                    <td>&nbsp</td>
+                {% else %}
+                    <td>
+                        <a href="{{ url_for('schedule.show_schedule', day=day, month=month_addr) }}"><div>{{ day }}</div></a>
+                    </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
