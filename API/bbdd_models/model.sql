@@ -28,7 +28,7 @@ CREATE TABLE consumer (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE producter_event (
+CREATE TABLE producer_event (
 	id INT NOT NULL AUTO_INCREMENT,
     product_id INT,
     logistic_center_id INT,

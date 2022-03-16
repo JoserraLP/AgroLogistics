@@ -11,7 +11,7 @@ INSERT INTO producer (name) VALUES
     ("Farmer Antonio"),
     ("Farmer Jose");
 
-INSERT INTO producer (name) VALUES 
+INSERT INTO consumer (name) VALUES 
     ("Caceres Greengrocer"), 
     ("Lola's Greengrocer"),
     ("UltraGreengrocer");
