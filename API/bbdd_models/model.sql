@@ -45,7 +45,7 @@ CREATE TABLE producer_event (
 );
 
 CREATE TABLE producer_transaction (
-	id INT NOT NULL AUTO_INCREMENT,
+	id INT NOT NULL,
     product_id INT,
     logistic_center_id INT,
     productor_id INT,
@@ -77,7 +77,7 @@ CREATE TABLE consumer_event (
 );
 
 CREATE TABLE consumer_transaction (
-	id INT NOT NULL AUTO_INCREMENT,
+	id INT NOT NULL,
     product_id INT,
     logistic_center_id INT,
     consumer_id INT,

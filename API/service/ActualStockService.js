@@ -46,18 +46,35 @@ module.exports.getActualStock = function(req, res, next) {
     var day = req.day.originalValue;
     var month = req.month.originalValue;
     var year = req.year.originalValue;
+    var logistic_center_id = req.logistic_center_id.originalValue;
+    var product_id = req.product_id.originalValue;
+    var product_category = req.product_category.originalValue;
 
-    var query = "";
+    var query = "SELECT actual_stock.id, actual_stock.product_id, product.name AS product_name, actual_stock.logistic_center_id, "
+                + "logistic_center.name AS logistic_center_name, actual_stock.product_category, actual_stock.amount_kg, actual_stock.date "
+                + "FROM actual_stock INNER JOIN product ON actual_stock.product_id = product.id " 
+                + "INNER JOIN logistic_center ON actual_stock.logistic_center_id = logistic_center.id ";
+    var conditions = [];
+
 
     if (day != undefined && month != undefined && year != undefined){
-        query = "SELECT * FROM actual_stock WHERE YEAR(date) = '" + year + "' AND MONTH(date) = " + month + " AND DAY(date) = " + day;
+        conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month + " AND DAY(date) = " + day);
     } else if (month != undefined && year != undefined){
-        query = "SELECT * FROM actual_stock WHERE YEAR(date) = '" + year + "' AND MONTH(date) = " + month;
+        conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month);
     } else if (year != undefined){
-        query = "SELECT * FROM actual_stock WHERE YEAR(date) = '" + year + "'";
-    } else {
-        query = "SELECT * FROM actual_stock";
+        conditions.push(" YEAR(date) = '" + year + "'");
     }
+
+    if (logistic_center_id != undefined)  conditions.push(" logistic_center_id = " + logistic_center_id);
+    
+    if (product_id != undefined) conditions.push(" product_id = " + product_id);
+    
+    if (product_category != undefined) conditions.push(" product_category = " + product_category);
+
+    if (conditions.length > 0){
+        query = query + " WHERE " + conditions.join(" AND ");
+    }
+
 
     if (query){
         // Execute query

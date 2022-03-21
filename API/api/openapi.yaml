@@ -924,6 +924,33 @@ paths:
           format: int32
           type: integer
         style: form
+      - description: Logistic Center ID
+        explode: true
+        in: query
+        name: logistic_center_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Producer ID
+        explode: true
+        in: query
+        name: producer_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product ID
+        explode: true
+        in: query
+        name: product_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
       responses:
         200:
           content:
@@ -1086,6 +1113,15 @@ paths:
       description: Returns all the producer transaction
       operationId: getProducerTransactions
       parameters:
+      - description: ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
       - description: Day
         explode: true
         in: query
@@ -1108,6 +1144,33 @@ paths:
         explode: true
         in: query
         name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Logistic Center ID
+        explode: true
+        in: query
+        name: logistic_center_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Producer ID
+        explode: true
+        in: query
+        name: producer_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product ID
+        explode: true
+        in: query
+        name: product_id
         required: false
         schema:
           format: int32
@@ -1302,6 +1365,33 @@ paths:
           format: int32
           type: integer
         style: form
+      - description: Logistic Center ID
+        explode: true
+        in: query
+        name: logistic_center_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Consumer ID
+        explode: true
+        in: query
+        name: consumer_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product ID
+        explode: true
+        in: query
+        name: product_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
       responses:
         200:
           content:
@@ -1464,6 +1554,15 @@ paths:
       description: Returns all the consumer transaction
       operationId: getConsumerTransactions
       parameters:
+      - description: ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
       - description: Day
         explode: true
         in: query
@@ -1486,6 +1585,33 @@ paths:
         explode: true
         in: query
         name: year
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Logistic Center ID
+        explode: true
+        in: query
+        name: logistic_center_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Consumer ID
+        explode: true
+        in: query
+        name: consumer_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product ID
+        explode: true
+        in: query
+        name: product_id
         required: false
         schema:
           format: int32
@@ -1680,6 +1806,32 @@ paths:
           format: int32
           type: integer
         style: form
+      - description: Logistic Center ID
+        explode: true
+        in: query
+        name: logistic_center_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product ID
+        explode: true
+        in: query
+        name: product_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product Category
+        explode: true
+        in: query
+        name: product_category
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         200:
           content:
@@ -1868,6 +2020,32 @@ paths:
         schema:
           format: int32
           type: integer
+        style: form
+      - description: Logistic Center ID
+        explode: true
+        in: query
+        name: logistic_center_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product ID
+        explode: true
+        in: query
+        name: product_id
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Product Category
+        explode: true
+        in: query
+        name: product_category
+        required: false
+        schema:
+          type: string
         style: form
       responses:
         200:
@@ -2077,8 +2255,11 @@ components:
       example:
         id: 1
         product_id: 1
+        product_name: Patata
         logistic_center_id: 1
+        logistic_center_name: Caceres Logistic Center
         productor_id: 1
+        productor_name: Farmer Lopez
         product_category: high_quality
         amount_kg: 1000
         date: "2022-03-10 10:00:00"
@@ -2093,14 +2274,23 @@ components:
           example: 1
           format: int64
           type: integer
+        product_name: 
+          example: Patata
+          type: string
         logistic_center_id:
           example: 1
           format: int64
           type: integer
+        logistic_center_name:
+          example: Caceres Logistic Center
+          type: string
         productor_id:
           example: 1
           format: int64
           type: integer
+        productor_name:
+          example: Farmer Lopez
+          type: string
         product_category:
           example: high_quality
           type: string
@@ -2121,8 +2311,11 @@ components:
       example:
         id: 1
         product_id: 1
+        product_name: Patata
         logistic_center_id: 1
+        logistic_center_name: Caceres Logistic Center
         productor_id: 1
+        productor_name: Farmer Lopez
         product_category: high_quality
         amount_kg: 100
         date: "2022-03-10 10:00:00"
@@ -2137,14 +2330,23 @@ components:
           example: 1
           format: int64
           type: integer
+        product_name: 
+          example: Patata
+          type: string
         logistic_center_id:
           example: 1
           format: int64
           type: integer
+        logistic_center_name:
+          example: Caceres Logistic Center
+          type: string
         productor_id:
           example: 1
           format: int64
           type: integer
+        productor_name:
+          example: Farmer Lopez
+          type: string
         product_category:
           example: high_quality
           type: string
@@ -2165,8 +2367,11 @@ components:
       example:
         id: 1
         product_id: 1
+        product_name: Patata
         logistic_center_id: 1
+        logistic_center_name: Caceres Logistic Center
         consumer_id: 1
+        consumer_name: Caceres Greengrocer
         product_category: high_quality
         amount_kg: 1000
         date: "2022-03-10 10:00:00"
@@ -2181,14 +2386,23 @@ components:
           example: 1
           format: int64
           type: integer
+        product_name: 
+          example: Patata
+          type: string
         logistic_center_id:
           example: 1
           format: int64
           type: integer
+        logistic_center_name:
+          example: Caceres Logistic Center
+          type: string
         consumer_id:
           example: 1
           format: int64
           type: integer
+        consumer_name:
+          example: Caceres Greengrocer
+          type: string
         product_category:
           example: high_quality
           type: string
@@ -2209,8 +2423,11 @@ components:
       example:
         id: 1
         product_id: 1
+        product_name: Patata
         logistic_center_id: 1
+        logistic_center_name: Caceres Logistic Center
         consumer_id: 1
+        consumer_name: Caceres Greengrocer
         product_category: high_quality
         amount_kg: 100
         date: "2022-03-10 10:00:00"
@@ -2225,14 +2442,23 @@ components:
           example: 1
           format: int64
           type: integer
+        product_name: 
+          example: Patata
+          type: string
         logistic_center_id:
           example: 1
           format: int64
           type: integer
+        logistic_center_name:
+          example: Caceres Logistic Center
+          type: string
         consumer_id:
           example: 1
           format: int64
           type: integer
+        consumer_name:
+          example: Caceres Greengrocer
+          type: string
         product_category:
           example: high_quality
           type: string
@@ -2253,7 +2479,9 @@ components:
       example:
         id: 1
         product_id: 1
+        product_name: Patata
         logistic_center_id: 1
+        logistic_center_name: Caceres Logistic Center
         product_category: high_quality
         amount_kg: 100
         date: "2022-03-10 10:00:00"
@@ -2266,10 +2494,16 @@ components:
           example: 1
           format: int64
           type: integer
+        product_name: 
+          example: Patata
+          type: string
         logistic_center_id:
           example: 1
           format: int64
           type: integer
+        logistic_center_name:
+          example: Caceres Logistic Center
+          type: string
         product_category:
           example: high_quality
           type: string
@@ -2284,7 +2518,9 @@ components:
       example:
         id: 1
         product_id: 1
+        product_name: Patata
         logistic_center_id: 1
+        logistic_center_name: Caceres Logistic Center
         product_category: high_quality
         amount_kg: 1000
         date: "2022-03-10 10:00:00"
@@ -2297,10 +2533,16 @@ components:
           example: 1
           format: int64
           type: integer
+        product_name: 
+          example: Patata
+          type: string
         logistic_center_id:
           example: 1
           format: int64
           type: integer
+        logistic_center_name:
+          example: Caceres Logistic Center
+          type: string
         product_category:
           example: high_quality
           type: string
