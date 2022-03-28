@@ -17,6 +17,7 @@ def insert_user_data(db):
         # ------- Users ------- #
 
         user = User(
+            id = 0,
             email = "admin@admin.com",
             password = generate_password_hash("admin", method='sha256'),
             name = "admin",
@@ -32,6 +33,7 @@ def insert_user_data(db):
         db.session.add(user)
 
         user = User(
+            id = 1,
             email = "center@center.com",
             password = generate_password_hash("center", method='sha256'),
             name = "center",
@@ -74,20 +76,5 @@ def insert_user_data(db):
         db.session.add(event)
         db.session.commit()
         
-    except Exception as e:
-        print(e)
-
-def insert_observation_data(db, obs):
-
-    try:
-        observation = Observation(
-            name = obs[0],
-            description = DESCRIPTIONS[obs[0]],
-            location = obs[1].strip()
-        )
-
-        db.session.add(observation)
-        db.session.commit()
-
     except Exception as e:
         print(e)
