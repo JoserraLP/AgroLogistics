@@ -2,8 +2,59 @@
 
 {% block content %}
 <div class="p-2 mt-5">
-    <p class="display-3">
-        Statistics for {{name}}
-    </p>
+    <h1 class="display-1">
+        Statistics
+    </h1>
+    <h2>Please set the dates to filter statistics and select one of the options</h2>
+    <div class="container mt-5">
+         <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 mx-auto text-center form">
+             <form action="{{url_for('statistics.select_options')}}" method="GET" class="justify-content-center">
+                <div class="form-group row">
+                    <label class="col-4 text-left mt-1" for="start_date">Start date:</label>
+                    <div class="col-8 mx-auto">
+                        <input class="text-left" type="date" id="start_date" name="start_date" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 text-left mt-1" for="end_date">End date:</label>
+                    <div class="col-8 mx-auto">
+                        <input class="text-left" type="date" id="end_date" name="end_date" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 text-left mt-1" for="option">Information:</label>
+                    <select name="option" required>
+                        <option value="" disabled selected hidden>Choose an option</option>
+                        <option value="actual_stock">Actual Stock</option>
+                        <option value="estimated_stock">Estimated Stock</option>
+                        <option value="consumer_event">Consumer Events</option>
+                        <option value="consumer_transaction">Consumer Transactions</option>
+                        <option value="producer_event">Producer Events</option>
+                        <option value="producer_transaction">Producer Transactions</option>
+                        <option value="summary">Summary</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label class="col-6 text-left mt-1" for="product">Product (only for stocks options):</label>
+                    <select name="product">
+                        <option value="" disabled selected hidden>Choose an option</option>
+                        {% for product in products %}
+                        <option value="{{ product['id'] }}">{{ product['name']}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label class="col-8 text-left mt-1" for="product_category">Product category (only for stocks options):</label>
+                    <select name="product_category">
+                        <option value="" disabled selected hidden>Choose an option</option>
+                        <option value="high_quality">High quality</option>
+                        <option value="medium_quality">Medium quality</option>
+                        <option value="low_quality">Low quality</option>
+                    </select>
+                </div>
+                <input class="mt-2 btn btn-dark" type="submit" value="Show statistics">
+             </form>
+         </div>
+    </div>
 </div>
 {% endblock %}

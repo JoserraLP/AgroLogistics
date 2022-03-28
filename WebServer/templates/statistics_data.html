@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block header_bokeh %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="p-2 mt-5">
+        <h1 class="display-1">
+            Statistics
+        </h1>
+        <div class="row">
+            {% if data %}
+                <div class="col pt-3 pb-3">
+                    <h1>{{ labels_info['info'] }}</h1>
+                    <h2>{{ labels_info['date'] }}</h2>
+                    <div class="col margin-center">
+                        <canvas id="chart" style="max-width:800px"></canvas>
+                        <script>
+                            let data = JSON.parse('{{ data|safe }}');
+                            let label = JSON.parse('{{ data_label|safe }}');
+                            let chartType = JSON.parse('{{ plot_type|safe }}')['type'];
+                            let labels = [];
+                            let values = {'actual_stock': [], 'estimated_stock': [], 'capacity': []};
+                            let chartData = {};
+                            let maximumY = 0;
+
+                            if (chartType === "bar"){
+                                for (let k in data) {
+                                    labels.push(k);
+                                    values.push(data[k]);
+                                    // Retrieve maximum Y based on the data
+                                    if (maximumY <= data[k])
+                                        maximumY = data[k]*2;
+                                }
+
+                                // bar chart data
+                                chartData = {
+                                    labels: labels,
+                                    datasets: [
+                                        {
+                                            backgroundColor: "rgba(0,0,0,1)",
+                                            borderColor: "rgba(255,255,255,1)",
+                                            data: values,
+                                            label: label['label']
+                                        }
+                                    ]
+                                }
+
+                            } else if (chartType === "line") {
+                                for (let k in data) {
+                                    labels.push(k);
+                                    values['estimated_stock'].push(data[k]['estimated_stock']);
+                                    values['actual_stock'].push(data[k]['actual_stock']);
+                                    values['capacity'].push(data[k]['capacity']);
+                                    // Retrieve maximum Y based on the capacity
+                                    if (maximumY <= data[k]['capacity'])
+                                        maximumY = data[k]['capacity']*2;
+                                }
+
+                                chartData = {
+                                    labels: labels,
+                                    datasets: [{
+                                        data: values['actual_stock'],
+                                        label: label['label'][0],
+                                        borderColor: "#3e95cd",
+                                        fill: false
+                                      }, {
+                                        data: values['estimated_stock'],
+                                        label: label['label'][1],
+                                        borderColor: "#8e5ea2",
+                                        fill: false
+                                      }, {
+                                        data: values['capacity'],
+                                        label: label['label'][2],
+                                        borderColor: "#3cba9f",
+                                        fill: false
+                                      }]
+                                }
+                            }
+
+                            let options = {
+
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                          min: 0,
+                                          max: maximumY,
+                                        },
+                                      }]
+                                }
+                            };
+
+                            // draw bar chart
+                            let chart = new Chart("chart", {
+                                type: chartType,
+                                data: chartData,
+                                options: options
+                            });
+                        </script>
+                    </div>
+                </div>
+            {% else %}
+                <p class="notification is-danger"> The statistics cannot be loaded, please refresh the page</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
