@@ -49,6 +49,7 @@ module.exports.getActualStock = function(req, res, next) {
     var logistic_center_id = req.logistic_center_id.originalValue;
     var product_id = req.product_id.originalValue;
     var product_category = req.product_category.originalValue;
+    var range = req.range.originalValue;
 
     var query = "SELECT actual_stock.id, actual_stock.product_id, product.name AS product_name, actual_stock.logistic_center_id, "
                 + "logistic_center.name AS logistic_center_name, actual_stock.product_category, actual_stock.amount_kg, actual_stock.date "
@@ -56,9 +57,13 @@ module.exports.getActualStock = function(req, res, next) {
                 + "INNER JOIN logistic_center ON actual_stock.logistic_center_id = logistic_center.id ";
     var conditions = [];
 
-
-    if (day != undefined && month != undefined && year != undefined){
-        conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month + " AND DAY(date) = " + day);
+    if (range != undefined){
+        range = range.split("/");
+        var start_date = range[0];
+        var end_date = range[1];
+        conditions.push(" date BETWEEN \"" + start_date + "\" AND \"" + end_date + "\"");
+    } else if (day != undefined && month != undefined && year != undefined){
+            conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month + " AND DAY(date) = " + day);
     } else if (month != undefined && year != undefined){
         conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month);
     } else if (year != undefined){
@@ -69,7 +74,7 @@ module.exports.getActualStock = function(req, res, next) {
     
     if (product_id != undefined) conditions.push(" product_id = " + product_id);
     
-    if (product_category != undefined) conditions.push(" product_category = " + product_category);
+    if (product_category != undefined) conditions.push(" product_category = \"" + product_category + "\"");
 
     if (conditions.length > 0){
         query = query + " WHERE " + conditions.join(" AND ");

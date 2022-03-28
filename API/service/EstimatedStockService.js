@@ -50,7 +50,7 @@ module.exports.getEstimatedStock = function(req, res, next) {
     var product_id = req.product_id.originalValue;
     var product_category = req.product_category.originalValue;
 
-    "SELECT estimated_stock.id, estimated_stock.product_id, product.name AS product_name, estimated_stock.logistic_center_id, "
+    var query = "SELECT estimated_stock.id, estimated_stock.product_id, product.name AS product_name, estimated_stock.logistic_center_id, "
                 + "logistic_center.name AS logistic_center_name, estimated_stock.product_category, estimated_stock.amount_kg, estimated_stock.date "
                 + "FROM estimated_stock INNER JOIN product ON estimated_stock.product_id = product.id " 
                 + "INNER JOIN logistic_center ON estimated_stock.logistic_center_id = logistic_center.id ";
@@ -69,7 +69,7 @@ module.exports.getEstimatedStock = function(req, res, next) {
     
     if (product_id != undefined) conditions.push(" product_id = " + product_id);
     
-    if (product_category != undefined) conditions.push(" product_category = " + product_category);
+    if (product_category != undefined) conditions.push(" product_category = \"" + product_category + "\"");
 
     if (conditions.length > 0){
         query = query + " WHERE " + conditions.join(" AND ");

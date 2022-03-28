@@ -32,7 +32,7 @@ CREATE TABLE producer_event (
 	id INT NOT NULL AUTO_INCREMENT,
     product_id INT,
     logistic_center_id INT,
-    productor_id INT,
+    producer_id INT,
     product_category VARCHAR(20),
     amount_kg DECIMAL(10, 2),
     date TIMESTAMP,
@@ -41,14 +41,14 @@ CREATE TABLE producer_event (
 	PRIMARY KEY (id),
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (logistic_center_id) REFERENCES logistic_center(id),
-    FOREIGN KEY (productor_id) REFERENCES producer(id)
+    FOREIGN KEY (producer_id) REFERENCES producer(id)
 );
 
 CREATE TABLE producer_transaction (
 	id INT NOT NULL,
     product_id INT,
     logistic_center_id INT,
-    productor_id INT,
+    producer_id INT,
     product_category VARCHAR(20),
     amount_kg DECIMAL(10, 2),
     date TIMESTAMP,
@@ -57,7 +57,7 @@ CREATE TABLE producer_transaction (
 	PRIMARY KEY (id),
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (logistic_center_id) REFERENCES logistic_center(id),
-    FOREIGN KEY (productor_id) REFERENCES producer(id)
+    FOREIGN KEY (producer_id) REFERENCES producer(id)
 );
 
 CREATE TABLE consumer_event (

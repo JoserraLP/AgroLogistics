@@ -60,7 +60,7 @@ module.exports.getConsumerTransactions = function(req, res, next) {
     var conditions = [];
 
     if (id != undefined){
-        query = query + " WHERE id = " + id; 
+        query = query + " WHERE consumer_transaction.id = " + id; 
     } 
     else {
         if (day != undefined && month != undefined && year != undefined){

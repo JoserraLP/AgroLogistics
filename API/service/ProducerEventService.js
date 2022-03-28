@@ -48,14 +48,14 @@ module.exports.getProducerEvents = function(req, res, next) {
     var year = req.year.originalValue;
     var logistic_center_id = req.logistic_center_id.originalValue;
     var product_id = req.product_id.originalValue;
-    var productor_id = req.productor_id.originalValue;
+    var producer_id = req.producer_id.originalValue;
 
     var query =  "SELECT producer_event.id, producer_event.product_id, product.name AS product_name, producer_event.logistic_center_id, "
-    + "logistic_center.name AS logistic_center_name, producer_event.productor_id, producer.name AS producer_name, producer_event.product_category, "
+    + "logistic_center.name AS logistic_center_name, producer_event.producer_id, producer.name AS producer_name, producer_event.product_category, "
     + "producer_event.amount_kg, producer_event.date, producer_event.price, producer_event.storage_type "
     + "FROM producer_event INNER JOIN product ON producer_event.product_id = product.id " 
     + "INNER JOIN logistic_center ON producer_event.logistic_center_id = logistic_center.id "
-    + "INNER JOIN producer ON producer_event.productor_id = producer.id";
+    + "INNER JOIN producer ON producer_event.producer_id = producer.id";
     var conditions = [];
 
     if (day != undefined && month != undefined && year != undefined){
@@ -72,8 +72,8 @@ module.exports.getProducerEvents = function(req, res, next) {
     if (product_id != undefined){
         conditions.push(" product_id = " + product_id);
     }
-    if (productor_id != undefined){
-        conditions.push(" productor_id = " + productor_id);
+    if (producer_id != undefined){
+        conditions.push(" producer_id = " + producer_id);
     }
 
     if (conditions.length > 0){
@@ -115,7 +115,7 @@ module.exports.postProducerEvent = function(req, res, next) {
         product_id: req.undefined.originalValue.product_id,
         logistic_center_id: req.undefined.originalValue.logistic_center_id,
         product_category: req.undefined.originalValue.product_category,
-        productor_id: req.undefined.originalValue.productor_id,
+        producer_id: req.undefined.originalValue.producer_id,
         amount_kg: req.undefined.originalValue.amount_kg,
         date: req.undefined.originalValue.date,
         price: req.undefined.originalValue.price,
@@ -178,7 +178,7 @@ module.exports.putProducerEvent = function(req, res, next) {
         product_id: req.undefined.originalValue.product_id,
         logistic_center_id: req.undefined.originalValue.logistic_center_id,
         product_category: req.undefined.originalValue.product_category,
-        productor_id: req.undefined.originalValue.productor_id,
+        producer_id: req.undefined.originalValue.producer_id,
         amount_kg: req.undefined.originalValue.amount_kg,
         date: req.undefined.originalValue.date,
         price: req.undefined.originalValue.price,

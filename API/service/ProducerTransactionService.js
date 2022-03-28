@@ -49,18 +49,18 @@ module.exports.getProducerTransactions = function(req, res, next) {
     var year = req.year.originalValue;
     var logistic_center_id = req.logistic_center_id.originalValue;
     var product_id = req.product_id.originalValue;
-    var productor_id = req.productor_id.originalValue;
+    var producer_id = req.producer_id.originalValue;
 
     var query =  "SELECT producer_transaction.id, producer_transaction.product_id, product.name AS product_name, producer_transaction.logistic_center_id, "
-    + "logistic_center.name AS logistic_center_name, producer_transaction.productor_id, producer.name AS producer_name, producer_transaction.product_category, "
+    + "logistic_center.name AS logistic_center_name, producer_transaction.producer_id, producer.name AS producer_name, producer_transaction.product_category, "
     + "producer_transaction.amount_kg, producer_transaction.date, producer_transaction.price, producer_transaction.storage_type "
     + "FROM producer_transaction INNER JOIN product ON producer_transaction.product_id = product.id " 
     + "INNER JOIN logistic_center ON producer_transaction.logistic_center_id = logistic_center.id "
-    + "INNER JOIN producer ON producer_transaction.productor_id = producer.id";
+    + "INNER JOIN producer ON producer_transaction.producer_id = producer.id";
     var conditions = [];
 
     if (id != undefined){
-        query = query + " WHERE id = " + id; 
+        query = query + " WHERE producer_transaction.id = " + id; 
     } 
     else {
         if (day != undefined && month != undefined && year != undefined){
@@ -75,7 +75,7 @@ module.exports.getProducerTransactions = function(req, res, next) {
         
         if (product_id != undefined) conditions.push(" product_id = " + product_id);
         
-        if (productor_id != undefined) conditions.push(" productor_id = " + productor_id);
+        if (producer_id != undefined) conditions.push(" producer_id = " + producer_id);
 
         if (conditions.length > 0){
             query = query + " WHERE " + conditions.join(" AND ");
@@ -116,7 +116,7 @@ module.exports.postProducerTransaction = function(req, res, next) {
         product_id: req.undefined.originalValue.product_id,
         logistic_center_id: req.undefined.originalValue.logistic_center_id,
         product_category: req.undefined.originalValue.product_category,
-        productor_id: req.undefined.originalValue.productor_id,
+        producer_id: req.undefined.originalValue.producer_id,
         amount_kg: req.undefined.originalValue.amount_kg,
         date: req.undefined.originalValue.date,
         price: req.undefined.originalValue.price,
@@ -179,7 +179,7 @@ module.exports.putProducerTransaction = function(req, res, next) {
         product_id: req.undefined.originalValue.product_id,
         logistic_center_id: req.undefined.originalValue.logistic_center_id,
         product_category: req.undefined.originalValue.product_category,
-        productor_id: req.undefined.originalValue.productor_id,
+        producer_id: req.undefined.originalValue.producer_id,
         amount_kg: req.undefined.originalValue.amount_kg,
         date: req.undefined.originalValue.date,
         price: req.undefined.originalValue.price,
