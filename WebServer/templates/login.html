@@ -11,7 +11,7 @@
     {% endwith %}
     <div class="container">
         <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
-            <form method="POST" action="/login" class="justify-content-center">
+            <form method="POST" action="{{url_for('auth.login')}}" class="justify-content-center">
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="email">Email:</label>
                     <input class="col-8 text-left" type="email" name="email" placeholder="email_test@gmail.com" autofocus="" required>
@@ -31,7 +31,7 @@
             </form>
         </div>
         <p class="lead">
-            Don't have an account? <a href="/signup">Sign up!</a>
+            Don't have an account? <a href="{{url_for('auth.signup')}}">Sign up!</a>
         </p>
     </div>
 </div>

@@ -5,16 +5,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>COVID-19 Information Web Page</title>
+    <title>AgroLogistics</title>
+    <link rel="shortcut icon" href="/static/img/logo.png">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" /> -->
     
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% block header_bokeh %}
+    {% endblock %}
 
 </head>
 
@@ -22,14 +33,21 @@
     <section>
 
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark pl-4">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse"  id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 pl-3">
                         <li class="nav-item ml-4 active">
-                            <a href="{{ url_for('main.index') }}" class="nav-link text-white">Home</a>
+                            <div class="row">
+                                <a href="{{ url_for('main.index') }}" class="col-xs-6">
+                                    <img src="/static/img/logo.png" height="40px"/>
+                                </a>
+                                <a href="{{ url_for('main.index') }}" class="col nav-link text-white col-xs-6">Home</a>
+                            </div>
                         </li>
                         {% if current_user.is_authenticated %}
                         <li class="nav-item ml-4 active">
@@ -37,14 +55,22 @@
                         </li>
 
                         {% if current_user.has_roles(['logistics_center']) %}
-                        <li class="nav-item ml-4 active">
-                            <a href="{{ url_for('stock.set_stock') }}" class="nav-link text-white">Stock</a>
+                        <li class="nav-item ml-4 active dropdown show">
+                                <a class="nav-link text-white dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Schedule
+                                </a>
+                                <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-content bg-dark">
+                                        <a href="{{ url_for('schedule.consumer_schedule') }}"
+                                           class="nav-link text-white">Consumer schedule</a>
+                                        <a href="{{ url_for('schedule.producer_schedule') }}"
+                                           class="nav-link text-white">Producer schedule</a>
+                                    </div>
+                                </div>
                         </li>
                         <li class="nav-item ml-4 active">
-                            <a href="{{ url_for('schedule.show_schedule') }}" class="nav-link text-white">Schedule</a>
-                        </li>
-                        <li class="nav-item ml-4 active">
-                            <a href="{{ url_for('auth.login') }}" class="nav-link text-white">Statistics</a>
+                            <a href="{{ url_for('statistics.show_options') }}" class="nav-link text-white">Statistics</a>
                         </li>
                         {% endif %}
 
@@ -73,11 +99,14 @@
 
         <footer class="footer">
             <div class="container-fluid text-center">
-                <div class="d-flex justify-content-center bg-dark row pt-4 pb-4">
-                    <div class="col text-white ml-4 mr-4"><a href="mailto:jolozanop@alumnos.unex.es">jolozanop@alumnos.unex.es</a></div>
-                    <div class="col text-white ml-4 mr-4">Jose Ramon Lozano Pinilla</div>
-                    <div class="col text-white ml-4 mr-4"><a href="mailto:joserralp@unex.es">joserralp@unex.es</a></div>
+                <div class="d-flex justify-content-center bg-dark row pt-4 pb-2">
+                    <div class="col text-white ml-4 mr-4"><a href="mailto:agrologistics.uex@gmail.com">agrologistics.uex@gmail.com</a></div>
+                    <div class="col text-white ml-4 mr-4">AgroLogistic Team</div>
                 </div>
+                <div class="d-flex justify-content-center bg-dark row pb-4 text-white">
+                    The AgroLogistics project has been selected as one of the winning projects of the&nbsp;
+                    <a href="http://catedratelefonica.unex.es/resolucion-de-premios-catedra-telefonica-2021-convocatoria-abierta-a-proyectos-iot-big-data-machine-learning-y-blockchain-para-la-transformacion-digital-del-sector-agroganadero/">Open Call for IoT Projects for the Agro-livestock Sector of the
+                        Uex Telefonica Chair for the 2021-2022 academic year</a>.</div>
             </div>
         </footer>
     </section>

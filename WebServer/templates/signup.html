@@ -11,7 +11,7 @@
     {% endwith %}
     <div class="container">
         <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
-            <form method="POST" action="/signup" class="justify-content-center">
+            <form method="POST" action="{{url_for('auth.signup')}}" class="justify-content-center">
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="name">Username:</label>
                     <input class="col-8 text-left" type="text" name="name"  autofocus="" required>
