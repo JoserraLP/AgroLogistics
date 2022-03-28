@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.map {
+    position: absolute;
+    height: 75%;
+    width: 100%;
+}
+
+.margin-center {
+    margin: 0 auto;
+}
+
+.bg-orange {
+    background: rgb(248, 147, 110);
+}
+
+.bg-light-green {
+    background: rgb(144, 238, 144);
+}
+
+.bg-light-red {
+    background: rgb(246, 21, 21);
+}
+
+.bg-gray{
+    background: rgb(134, 134, 134);
+}
+
+canvas{
+ position:relative;
+ top:0;bottom:0;right:0;left:0;
+ margin:auto;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
