@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-2 mt-5">
+    {% if event_info['consumer_id']  %}
+    <h1>Add consumer transaction</h1>
+    {% elif event_info['producer_id'] %}
+    <h1>Add producer transaction</h1>
+    {% endif %}
+</div>
+<div class="container mt-5">
+    <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 mx-auto text-center form">
+        {% if event_info['consumer_id']  %}
+        <form action="{{url_for('transaction.add_consumer_transaction')}}" method="POST" class="justify-content-center">
+        {% elif event_info['producer_id'] %}
+        <form action="{{url_for('transaction.add_producer_transaction')}}" method="POST" class="justify-content-center">
+        {% endif %}
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="product_id">Product:</label>
+                <input class="col-8 text-left bg-gray" type="text" id="product_id" name="product_id" required readonly
+                       value="{{ event_info['product_name'] }}">
+            </div>
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="logistic_center_id">Logistic center:</label>
+                <input class="col-8 text-left bg-gray" type="text" id="logistic_center_id" name="logistic_center_id" required readonly
+                       value="{{ event_info['logistic_center_name'] }}">
+            </div>
+            <div class="form-group row">
+                {% if event_info['consumer_id']  %}
+                <label class="col-4 text-left mt-1" for="consumer_id">Consumer:</label>
+                <input class="col-8 text-left bg-gray" type="text" id="consumer_id" name="consumer_id" required readonly
+                       value="{{ event_info['consumer_name'] }}">
+                {% if event_info['producer_id']  %}
+                <label class="col-4 text-left mt-1" for="producer_id">Producer:</label>
+                <input class="col-8 text-left bg-gray" type="text" id="producer_id" name="producer_id" required readonly
+                       value="{{ event_info['producer_name'] }}">
+                {% endif %}
+            </div>
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="product_category">Product category:</label>
+                <input class="col-8 text-left" type="text" id="product_category" name="product_category" required
+                value="{{ event_info['product_category'] }}">
+            </div>
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="amount_kg">Amount (kg):</label>
+                <input class="col-8 text-left" type="text" id="amount_kg" name="amount_kg" required
+                value="{{ event_info['amount_kg'] }}">
+            </div>
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="price">Price (€):</label>
+                <input class="col-8 text-left" type="text" id="price" name="price" required
+                value="{{ event_info['price'] }}">
+            </div>
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="storage_type">Storage type:</label>
+                <input class="col-8 text-left" type="text" id="storage_type" name="storage_type" required
+                value="{{ event_info['storage_type'] }}">
+            </div>
+            <div class="form-group row">
+                <label class="col-4 text-left mt-1" for="date">Date:</label>
+                <div class="col-8 mx-auto">
+                    <input class="text-left" type="datetime-local" id="date" name="date" required value="{{ event_info['date'] }}">
+                </div>
+            </div>
+            <input class="mt-2 btn btn-dark" type="submit" value="Send">
+        </form>
+    </div>
+</div>
+{% endblock %}

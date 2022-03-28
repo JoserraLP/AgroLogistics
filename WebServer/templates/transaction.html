@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-2 mt-5">
+    {% if event_info['consumer_id']  %}
+    <h1>Consumer transaction</h1>
+    {% elif event_info['producer_id'] %}
+    <h1>Producer transaction</h1>
+    {% endif %}
+</div>
+<div class="container mt-5">
+    <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 mx-auto text-center form">
+        <div class="form-group row">
+            <p class="text-left mt-1">Product: {{ event_info['product_name'] }}</p>
+        </div>
+        <div class="form-group row">
+            <p class="text-left mt-1">Logistic Center: {{ event_info['logistic_center_name'] }}</p>
+        </div>
+        <div class="form-group row">
+            {% if event_info['consumer_id']  %}
+            <p class="text-left mt-1">Consumer: {{ event_info['consumer_name'] }}</p>
+            {% elif event_info['producer_id'] %}
+            <p class="text-left mt-1">Producer: {{ event_info['producer_name'] }}</p>
+            {% endif %}
+        </div>
+        <div class="form-group row">
+            <p class="text-left mt-1">Product category: {{ event_info['product_category'] }}</p>
+        </div>
+        <div class="form-group row">
+            <p class="text-left mt-1">Amount (KG): {{ event_info['amount_kg'] }}</p>
+        </div>
+        <div class="form-group row">
+            <p class="text-left mt-1">Price (€): {{ event_info['price'] }}</p>
+        </div>
+        <div class="form-group row">
+            <p class="text-left mt-1">Storage type: {{ event_info['storage_type'] }}</p>
+        </div>
+        <div class="form-group row">
+            <p class="text-left mt-1">Date: {{ event_info['date'] }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
