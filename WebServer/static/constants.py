@@ -13,7 +13,8 @@ INFO_LABELS = {
     'consumer_event': 'Consumer events',
     'consumer_transaction': 'Consumer transactions',
     'producer_event': 'Producer events',
-    'producer_transaction': 'Producer transactions'
+    'producer_transaction': 'Producer transactions',
+    'summary': 'Stock\' evolution'
 }
 
 # if the selected range is only one day -> Show per hour
@@ -36,3 +37,6 @@ PLOT_DAY_RANGE = {
         'date_format': "%Y-%m-%d"
     }
 }
+
+PUBLIC_KEY_DIR = "./WebServer/keys/pub_key.pem"
+PRIVATE_KEY_DIR = "./WebServer/keys/private_key.pem"

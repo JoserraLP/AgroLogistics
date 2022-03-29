@@ -1,9 +1,14 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_user import UserManager
 
 from .config import default
+from .static.constants import PRIVATE_KEY_DIR, PUBLIC_KEY_DIR
+
+import rsa
 
 # init SQLAlchemy
 db = SQLAlchemy()
@@ -16,7 +21,8 @@ def create_app():
             app (object): Configured Flask app
 
     '''
-    # Create Flask app 
+
+    # Create Flask app
     app = Flask(__name__, instance_relative_config=True)
 
     # Configure the application with the config file
@@ -40,7 +46,6 @@ def create_app():
 
     from .transaction import transaction as transaction_blueprint
     app.register_blueprint(transaction_blueprint)
-
 
     # Import models to create the tables
     from .models import User, Role
@@ -76,5 +81,22 @@ def create_app():
             return User.query.get(int(user_id))
         except:
             return None
+
+    # Generate and store keys
+    if not os.path.exists(PRIVATE_KEY_DIR) and not os.path.exists(PUBLIC_KEY_DIR):
+        public_key, private_key = rsa.newkeys(512)
+        with open(PUBLIC_KEY_DIR, 'w+') as fp:
+            fp.write(public_key.save_pkcs1().decode())
+        with open(PRIVATE_KEY_DIR, 'w+') as fp:
+            fp.write(private_key.save_pkcs1().decode())
+
+    '''
+    with open(PUBLIC_KEY_DIR, mode='rb') as public_file:
+        key_pub_data = public_file.read()
+        public_key = rsa.PublicKey.load_pkcs1(key_pub_data)
+
+        # Generate encrypted password
+        print(repr(rsa.encrypt("admin".encode('utf-8'), public_key)))
+    '''
 
     return app
