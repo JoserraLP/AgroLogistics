@@ -106,6 +106,8 @@ module.exports.postActualStock = function(req, res, next) {
     //Parameters
     console.log(req);
 
+    // TODO based on previous ones and update next ones
+
     // Create a query
     var query = 'INSERT INTO actual_stock SET ?'
 

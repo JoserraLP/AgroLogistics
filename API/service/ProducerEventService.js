@@ -1,5 +1,6 @@
 'use strict';
 
+const { prependOnceListener } = require("../config/config");
 const connection = require("../config/config");
 
 /**
@@ -125,27 +126,73 @@ module.exports.postProducerEvent = function(req, res, next) {
     // Update the estimated stock for a given date
     var stock_query = 'INSERT INTO estimated_stock SET ?'
 
-    var estimated_stock_query = 'SELECT * FROM estimated_stock WHERE product_id = ' + req.undefined.originalValue.product_id
-        + ' AND logistic_center_id = ' + req.undefined.originalValue.logistic_center_id + ' AND product_category = "' 
-        + req.undefined.originalValue.product_category + "\" AND DATE(date) < '" + req.undefined.originalValue.date  + '\' ORDER BY id DESC LIMIT 1'
+    // Calculate current stock based on previous data (consumer and transaction events)
+    var previous_stock_query = 'SELECT SUM(amount_kg) AS amount_kg, product_id, logistic_center_id, product_category  ' +
+                                ' FROM ' +
+                                '(SELECT SUM(amount_kg) AS amount_kg, product_id, logistic_center_id, product_category '+
+                                ' FROM producer_event' + 
+                                ' WHERE product_id = ' + req.undefined.originalValue.product_id +
+                                ' AND logistic_center_id = ' + req.undefined.originalValue.logistic_center_id + ' AND product_category = "' +
+                                req.undefined.originalValue.product_category + "\" AND DATE(date) < '" + req.undefined.originalValue.date  + '\' ' +
+                                ' UNION ALL ' +
+                                'SELECT -SUM(amount_kg) AS amount_kg, product_id, logistic_center_id, product_category ' +
+                                ' FROM consumer_event ' +
+                                ' WHERE product_id = ' + req.undefined.originalValue.product_id +
+                                ' AND logistic_center_id = ' + req.undefined.originalValue.logistic_center_id + ' AND product_category = "' +
+                                req.undefined.originalValue.product_category + "\" AND DATE(date) < '" + req.undefined.originalValue.date  + '\' ' +
+                                ' ) AS stock;'
 
-    // Execute query
-    connection.query(estimated_stock_query, function (error, results, fields) {
+    console.log(previous_stock_query)
+
+    // Create new value based on the previous information
+    connection.query(previous_stock_query, function (error, results, fields) {
         if (error) throw error;
-        var estimated_stock = results[0];
+        if (typeof results !== 'undefined'){
+            var previous_stock = results[0];
 
-        var new_estimated_stock = {
-            'product_id': estimated_stock.product_id,
-            'logistic_center_id': estimated_stock.logistic_center_id,
-            'product_category': estimated_stock.product_category,
-            'date': req.undefined.originalValue.date,
-            'amount_kg': estimated_stock['amount_kg'] + req.undefined.originalValue.amount_kg
+            var new_estimated_stock = {
+                'product_id': req.undefined.originalValue.product_id,
+                'logistic_center_id': req.undefined.originalValue.logistic_center_id,
+                'product_category': req.undefined.originalValue.product_category,
+                'date': req.undefined.originalValue.date,
+                'amount_kg': previous_stock['amount_kg'] + req.undefined.originalValue.amount_kg
+            }
+
+            // Execute query
+            connection.query(stock_query, [new_estimated_stock], function (error, results, fields) {
+                if (error) throw error;
+            });
+
+        } else { // No previous values
+
+            var new_estimated_stock = {
+                'product_id': req.undefined.originalValue.product_id,
+                'logistic_center_id': req.undefined.originalValue.logistic_center_id,
+                'product_category': req.undefined.originalValue.product_category,
+                'date': req.undefined.originalValue.date,
+                'amount_kg': req.undefined.originalValue.amount_kg
+            }
+            
+            // Execute query
+            connection.query(stock_query, [new_estimated_stock], function (error, results, fields) {
+                if (error) throw error;
+            });
+
         }
-        // Execute query
-        connection.query(stock_query, [new_estimated_stock], function (error, results, fields) {
+
+        // Update the stock of the future stock with the new stock value
+        var update_future_stock = 'UPDATE estimated_stock SET amount_kg = amount_kg + ' + req.undefined.originalValue.amount_kg + 
+            ' WHERE product_id = ' + req.undefined.originalValue.product_id +
+            ' AND logistic_center_id = ' + req.undefined.originalValue.logistic_center_id + ' AND product_category = "' +
+            req.undefined.originalValue.product_category + "\" AND DATE(date) > '" + req.undefined.originalValue.date  + '\'';
+    
+        // Create new value based on the previous information
+        connection.query(update_future_stock, function (error, results, fields) {
             if (error) throw error;
         });
+
     });
+
 
     // Execute query
     connection.query(query, [data], function (error, results, fields) {
