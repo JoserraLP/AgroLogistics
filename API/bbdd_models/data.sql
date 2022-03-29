@@ -2,9 +2,9 @@ INSERT INTO product (name) VALUES
     ("Potato"), ("Carrot"), 
     ("Strawberry"), ("Apple");
 
-INSERT INTO logistic_center (name, capacity_kg, cooled_capacity_kg) VALUES 
-    ("Caceres Logistic Center", 10000, 2000), 
-    ("Badajoz Logistic Center", 20000, 5000);
+INSERT INTO logistic_center (name, capacity_kg, cooled_capacity_kg, email, password) VALUES 
+    ("Caceres Logistic Center", 10000, 2000, "cc_logistic_center@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'"), 
+    ("Badajoz Logistic Center", 20000, 5000, "ba_logistic_center@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'");
 
 INSERT INTO producer (name) VALUES 
     ("Farmer Lopez"), 

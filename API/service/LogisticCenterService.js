@@ -98,8 +98,12 @@ module.exports.postLogisticCenter = function(req, res, next) {
     var data = {
         name: req.undefined.originalValue.name,
         capacity_kg: req.undefined.originalValue.capacity_kg,
-        cooled_capacity_kg: req.undefined.originalValue.cooled_capacity_kg
+        cooled_capacity_kg: req.undefined.originalValue.cooled_capacity_kg,
+        email: req.undefined.originalValue.email,
+        password: req.undefined.originalValue.password
     }
+
+    console.log(data);
 
     // Execute query
     connection.query(query, [data], function (error, results, fields) {

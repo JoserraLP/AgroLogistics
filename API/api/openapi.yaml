@@ -266,8 +266,8 @@ paths:
           content:
             application/json:
               schema:
-                example: '[{"id":"1","name":"Patata", "capacity_kg": 1000, "cooled_capacity_kg":
-                  200}]'
+                example: '[{"id":"1","name":"Caceres Logistic Center", "capacity_kg": 1000, "cooled_capacity_kg":
+                  200, "email": "cc_logistic_center@gmail.com", "password": "****"}]'
                 title: Info
                 type: string
           description: Logistic center example
@@ -2256,6 +2256,8 @@ components:
         name: Caceres Logistic Center
         capacity_kg: 10000
         cooled_capacity_kg: 20000
+        email: cc_logistic_center@gmail.com
+        password: "****"
       properties:
         id:
           example: 1
@@ -2272,6 +2274,12 @@ components:
           example: 10000
           format: int64
           type: integer
+        email:
+          example: cc_logistic_center@gmail.com
+          type: string
+        password:
+          example: "******"
+          type: string
       type: object
     Producer:
       example:

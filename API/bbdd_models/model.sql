@@ -13,7 +13,9 @@ CREATE TABLE logistic_center (
     name VARCHAR(40),  
     capacity_kg DECIMAL(10, 2),    
     cooled_capacity_kg DECIMAL(10, 2),
-	PRIMARY KEY (id)
+    email VARCHAR(50),
+    password VARCHAR(1000),
+	PRIMARY KEY (id, email)
 );
 
 CREATE TABLE producer (
