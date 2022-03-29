@@ -22,10 +22,9 @@
                             let label = JSON.parse('{{ data_label|safe }}');
                             let chartType = JSON.parse('{{ plot_type|safe }}')['type'];
                             let labels = [];
-                            let values = {'actual_stock': [], 'estimated_stock': [], 'capacity': []};
+                            let values = [];
                             let chartData = {};
                             let maximumY = 0;
-
                             if (chartType === "bar"){
                                 for (let k in data) {
                                     labels.push(k);
@@ -49,6 +48,7 @@
                                 }
 
                             } else if (chartType === "line") {
+                                values = {'actual_stock': [], 'estimated_stock': [], 'capacity': []};
                                 for (let k in data) {
                                     labels.push(k);
                                     values['estimated_stock'].push(data[k]['estimated_stock']);

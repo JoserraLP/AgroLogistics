@@ -50,10 +50,8 @@ def select_options():
         actual_stock_used = process_info(start_date=start_date, end_date=end_date, info=actual_stock,
                                          selected_option=selected_option)
 
-        print(actual_stock_used)
-
         # Perform request to retrieve total estimated stock
-        estimated_stock = requests.get(SERVER_API_URL + '/actual_stock', params=params).json()['message']
+        estimated_stock = requests.get(SERVER_API_URL + '/estimated_stock', params=params).json()['message']
 
         # Process info
         estimated_stock_used = process_info(start_date=start_date, end_date=end_date, info=estimated_stock,
