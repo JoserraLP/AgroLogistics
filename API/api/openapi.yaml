@@ -2285,6 +2285,8 @@ components:
       example:
         id: 1
         name: Farmer Lopez
+        email: p_lopez@gmail.com
+        password: "****"
       properties:
         id:
           example: 1
@@ -2293,11 +2295,19 @@ components:
         name:
           example: Farmer Lopez
           type: string
+        email:
+          example: p_lopez@gmail.com
+          type: string
+        password:
+          example: "******"
+          type: string
       type: object
     Consumer:
       example:
         id: 1
         name: Caceres Greengrocer
+        email: c_caceres@gmail.com
+        password: "****"
       properties:
         id:
           example: 1
@@ -2305,6 +2315,12 @@ components:
           type: integer
         name:
           example: Caceres Greengrocer
+          type: string
+        email:
+          example: c_caceres@gmail.com
+          type: string
+        password:
+          example: "******"
           type: string
       type: object
     ProducerEvent:

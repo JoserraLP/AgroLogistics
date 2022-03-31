@@ -20,13 +20,17 @@ CREATE TABLE logistic_center (
 
 CREATE TABLE producer (
 	id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(40),  
+    name VARCHAR(40), 
+    email VARCHAR(50),
+    password VARCHAR(1000), 
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE consumer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40),  
+    email VARCHAR(50),
+    password VARCHAR(1000),
 	PRIMARY KEY (id)
 );
 

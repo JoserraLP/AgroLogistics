@@ -97,7 +97,9 @@ module.exports.postConsumer = function(req, res, next) {
 
     // Create data
     var data = {
-        name: req.undefined.originalValue.name
+        name: req.undefined.originalValue.name,
+        email: req.undefined.originalValue.email,
+        password: req.undefined.originalValue.password
     }
 
     // Execute query
