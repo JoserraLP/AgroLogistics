@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from . import db
+from sqlalchemy.dialects.oracle import BLOB
 
 
 class User(UserMixin, db.Model):
@@ -27,7 +28,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(1000))
+    password = db.Column(BLOB)
     name = db.Column(db.String(100))
     capacity_kg = db.Column(db.Float)
     cooled_capacity_kg = db.Column(db.Float)

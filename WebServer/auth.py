@@ -43,10 +43,9 @@ def do_login(request):
             key_priv_data = private_file.read()
             private_key = rsa.PrivateKey.load_pkcs1(key_priv_data)
 
-        user_password_bytes = ast.literal_eval(repr(user.password).replace("\\\\", "\\").replace("\"", ""))
-
-        # Decrypt password -> Processed to remove the \"
-        decrypted_password = rsa.decrypt(user_password_bytes, private_key)
+        # Decrypt password (retrieved from byte array)
+        user_password = ast.literal_eval(user.password.decode("utf-8"))
+        decrypted_password = rsa.decrypt(user_password, private_key)
 
     # Check if user actually exists
     # Get the input password, hash it, and compare it to the hashed password stored in database
@@ -116,12 +115,15 @@ def do_signup(request):
 
         # Generate encrypted password
         password = rsa.encrypt(password.encode('utf-8'), public_key)
+        # Represent as list of bytes
+        password_bytes = str(list(password)).encode('utf-8')
 
-        # The user has the right credentials so do the sign up
+
+    # The user has the right credentials so do the sign up
     # A new user is created with the form data
     new_user = User(
         email=email,
-        password=password,
+        password=password_bytes,
         name=name,
         capacity_kg=capacity_kg,
         cooled_capacity_kg=cooled_capacity_kg,
@@ -130,7 +132,7 @@ def do_signup(request):
 
     data = {
         'email': email,
-        'password': str(password),
+        'password': str(list(password)),
         'name': name,
         'capacity_kg': capacity_kg,
         'cooled_capacity_kg': cooled_capacity_kg
