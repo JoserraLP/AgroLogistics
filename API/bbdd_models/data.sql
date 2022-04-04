@@ -3,18 +3,18 @@ INSERT INTO product (name) VALUES
     ("Strawberry"), ("Apple");
 
 INSERT INTO logistic_center (name, capacity_kg, cooled_capacity_kg, email, password) VALUES 
-    ("Caceres Logistic Center", 10000, 2000, "cc_logistic_center@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'"), 
-    ("Badajoz Logistic Center", 20000, 5000, "ba_logistic_center@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'");
+    ("Caceres Logistic Center", 10000, 2000, "cc_logistic_center@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]'), 
+    ("Badajoz Logistic Center", 20000, 5000, "ba_logistic_center@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]');
 
 INSERT INTO producer (name, email, password) VALUES 
-    ("Farmer Lopez", "p_lopez@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'"), 
-    ("Farmer Antonio", "p_antonio@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'"),
-    ("Farmer Jose", "p_jose@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'");
+    ("Farmer Lopez", "p_lopez@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]'), 
+    ("Farmer Antonio", "p_antonio@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]'),
+    ("Farmer Jose", "p_jose@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]');
 
 INSERT INTO consumer (name, email, password) VALUES 
-    ("Caceres Greengrocer", "c_caceres@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'"), 
-    ("Lola's Greengrocer", "c_lola@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'"),
-    ("UltraGreengrocer", "c_ultra@gmail.com", "b'\\x8aV\\xf2\\x91\\xf6\\xe5\\x1d\\xe2\\xcd\\xc72{[xZ\\xc7\\x04u\\xceL\\x9fh\\x95\\x15Iu\\xe5\\x1ck\\xd7\\x0fm;uqA\\xbfPJ\\x9cj\\x1dd\\xb0\\x19\\xa2\\xe37\\xfbv\\x1bb\\xc6\\x9bd\\x8c\\x04ns\\xdd3:\\xb5U'");
+    ("Caceres Greengrocer", "c_caceres@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]'), 
+    ("Lola's Greengrocer", "c_lola@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]'),
+    ("UltraGreengrocer", "c_ultra@gmail.com", '[2, 89, 89, 224, 26, 18, 61, 96, 201, 10, 115, 111, 146, 72, 157, 107, 120, 14, 12, 109, 73, 252, 73, 191, 187, 183, 199, 70, 10, 38, 89, 128, 131, 232, 178, 129, 173, 200, 94, 23, 215, 132, 171, 36, 44, 163, 117, 153, 168, 189, 215, 130, 58, 146, 68, 230, 180, 135, 128, 109, 57, 16, 192, 26]');
 
 INSERT INTO producer_event (product_id, logistic_center_id, producer_id, product_category, 
                             amount_kg, date, price, storage_type) VALUES 

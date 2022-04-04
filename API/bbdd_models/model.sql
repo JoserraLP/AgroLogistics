@@ -14,7 +14,7 @@ CREATE TABLE logistic_center (
     capacity_kg DECIMAL(10, 2),    
     cooled_capacity_kg DECIMAL(10, 2),
     email VARCHAR(50),
-    password VARCHAR(1000),
+    password BLOB,
 	PRIMARY KEY (id, email)
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE producer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40), 
     email VARCHAR(50),
-    password VARCHAR(1000), 
+    password BLOB, 
 	PRIMARY KEY (id)
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE consumer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40),  
     email VARCHAR(50),
-    password VARCHAR(1000),
+    password BLOB,
 	PRIMARY KEY (id)
 );
 
