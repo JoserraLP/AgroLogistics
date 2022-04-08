@@ -22,7 +22,7 @@ CREATE TABLE producer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40), 
     email VARCHAR(50),
-    password BLOB, 
+    password VARCHAR(20), 
 	PRIMARY KEY (id)
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE consumer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40),  
     email VARCHAR(50),
-    password BLOB,
+    password VARCHAR(20),
 	PRIMARY KEY (id)
 );
 
