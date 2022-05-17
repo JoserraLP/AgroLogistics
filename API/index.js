@@ -12,6 +12,7 @@ app.use(bodyParser.json({
 }));
 var oasTools = require('oas-tools');
 var jsyaml = require('js-yaml');
+var serverAddress = '0.0.0.0';
 var serverPort = 8080;
 
 var spec = fs.readFileSync(path.join(__dirname, '/api/openapi.yaml'), 'utf8');
@@ -29,7 +30,7 @@ var options_object = {
 oasTools.configure(options_object);
 
 oasTools.initialize(oasDoc, app, function() {
-    http.createServer(app).listen(serverPort, function() {
+    http.createServer(app).listen(serverPort, serverAddress, function() {
         console.log("App running at http://localhost:" + serverPort);
         console.log("________________________________________________________________");
         if (options_object.docs !== false) {
