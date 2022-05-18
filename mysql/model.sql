@@ -1,14 +1,14 @@
-CREATE DATABASE agrologistics;
+CREATE DATABASE IF NOT EXISTS agrologistics;
 
 USE agrologistics;
 
-CREATE TABLE product (
+CREATE TABLE IF NOT EXISTS product (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40),  
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE logistic_center (
+CREATE TABLE IF NOT EXISTS logistic_center (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40),  
     capacity_kg DECIMAL(10, 2),    
@@ -18,7 +18,7 @@ CREATE TABLE logistic_center (
 	PRIMARY KEY (id, email)
 );
 
-CREATE TABLE producer (
+CREATE TABLE IF NOT EXISTS producer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40), 
     email VARCHAR(50),
@@ -26,7 +26,7 @@ CREATE TABLE producer (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE consumer (
+CREATE TABLE IF NOT EXISTS consumer (
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40),  
     email VARCHAR(50),
@@ -34,7 +34,7 @@ CREATE TABLE consumer (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE producer_event (
+CREATE TABLE IF NOT EXISTS producer_event (
 	id INT NOT NULL AUTO_INCREMENT,
     product_id INT,
     logistic_center_id INT,
@@ -50,7 +50,7 @@ CREATE TABLE producer_event (
     FOREIGN KEY (producer_id) REFERENCES producer(id)
 );
 
-CREATE TABLE producer_transaction (
+CREATE TABLE IF NOT EXISTS producer_transaction (
 	id INT NOT NULL,
     product_id INT,
     logistic_center_id INT,
@@ -66,7 +66,7 @@ CREATE TABLE producer_transaction (
     FOREIGN KEY (producer_id) REFERENCES producer(id)
 );
 
-CREATE TABLE consumer_event (
+CREATE TABLE IF NOT EXISTS consumer_event (
 	id INT NOT NULL AUTO_INCREMENT,
     product_id INT,
     logistic_center_id INT,
@@ -82,7 +82,7 @@ CREATE TABLE consumer_event (
     FOREIGN KEY (consumer_id) REFERENCES consumer(id)
 );
 
-CREATE TABLE consumer_transaction (
+CREATE TABLE IF NOT EXISTS consumer_transaction (
 	id INT NOT NULL,
     product_id INT,
     logistic_center_id INT,
@@ -98,7 +98,7 @@ CREATE TABLE consumer_transaction (
     FOREIGN KEY (consumer_id) REFERENCES consumer(id)
 );
 
-CREATE TABLE actual_stock (
+CREATE TABLE IF NOT EXISTS actual_stock (
 	id INT NOT NULL AUTO_INCREMENT,
     product_id INT,
     logistic_center_id INT,
@@ -110,7 +110,7 @@ CREATE TABLE actual_stock (
     FOREIGN KEY (logistic_center_id) REFERENCES logistic_center(id)
 );
 
-CREATE TABLE estimated_stock (
+CREATE TABLE IF NOT EXISTS estimated_stock (
 	id INT NOT NULL AUTO_INCREMENT,
     product_id INT,
     logistic_center_id INT,

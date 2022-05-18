@@ -4,6 +4,6 @@
 cd %cd%
 
 :: ------ FLASK ------
-set FLASK_APP=WebServer
+set FLASK_APP=agrologistics_web
 
 flask run --host=0.0.0.0

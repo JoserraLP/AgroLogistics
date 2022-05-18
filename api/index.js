@@ -29,17 +29,22 @@ var options_object = {
 
 oasTools.configure(options_object);
 
-oasTools.initialize(oasDoc, app, function() {
-    http.createServer(app).listen(serverPort, serverAddress, function() {
-        console.log("App running at http://localhost:" + serverPort);
-        console.log("________________________________________________________________");
-        if (options_object.docs !== false) {
-            console.log('API docs (Swagger UI) available on http://localhost:' + serverPort + '/docs');
-            console.log("________________________________________________________________");
-        }
+setTimeout(function() {
+    oasTools.initialize(oasDoc, app, function() {
 
+        http.createServer(app).listen(serverPort, serverAddress, function() {
+            console.log("App running at http://172.30.0.3:" + serverPort);
+            console.log("________________________________________________________________");
+            if (options_object.docs !== false) {
+                console.log('API docs (Swagger UI) available on http://172.30.0.3:' + serverPort + '/docs');
+                console.log("________________________________________________________________");
+            }
+    
+        });
     });
-});
+}, 300000); // 5 minutes
+
+
 
 // MySQL failure
 // https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server

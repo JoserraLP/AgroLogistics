@@ -6,10 +6,10 @@ import rsa
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 import requests
 from flask_login import login_user, login_required, logout_user, current_user
-from .models import User, Role
-from . import db
+from agrologistics_web.models import User, Role
+from agrologistics_web import db
 
-from .static.constants import PRIVATE_KEY_DIR, PUBLIC_KEY_DIR, SERVER_API_URL
+from agrologistics_web.static.constants import PRIVATE_KEY_DIR, PUBLIC_KEY_DIR, SERVER_API_URL
 
 # Auth blueprint
 auth = Blueprint('auth', __name__)

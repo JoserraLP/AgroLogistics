@@ -1,10 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_login import login_required, current_user
 from datetime import datetime
-from .models import ProducerEvent
-from .static.constants import SERVER_API_URL, OCCUPIED_DAY_DICT
+from agrologistics_web.static.constants import SERVER_API_URL, OCCUPIED_DAY_DICT
 
-from . import db
 import requests
 import calendar
 

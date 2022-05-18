@@ -2,7 +2,7 @@ import requests
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 import pytz
-from .static.constants import SERVER_API_URL, INFO_LABELS, PLOT_DAY_RANGE
+from agrologistics_web.static.constants import SERVER_API_URL, INFO_LABELS, PLOT_DAY_RANGE
 from datetime import date, datetime, timedelta
 import json
 

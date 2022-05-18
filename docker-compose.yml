@@ -1,8 +1,8 @@
 version: '3.3'
 
 services:
-  db:
-    container_name: db
+  agrologistics_db:
+    container_name: agrologistics_db
     image: mysql:5.7
     restart: always
     environment:
@@ -10,28 +10,53 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'  # needs to be enclosed with quotes
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - 3308:3306
+      - 3310:3306
+    volumes:
+      # Load initialization scripts by order
+      - "./mysql/model.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./mysql/data.sql:/docker-entrypoint-initdb.d/2.sql"
+      - "./mysql/user.sql:/docker-entrypoint-initdb.d/3.sql"
+      - "./mysql/my.cnf:/etc/mysql/my.cnf"
     networks:
       net:
-        ipv4_address: 172.20.0.2  
-  api:
-    container_name: api
-    build: ./API/
+        ipv4_address: 172.30.0.2  
+  agrologistics_api:
+    container_name: agrologistics_api
+    build: ./api/
     restart: always
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - 8080:8080
-    links:
-      - db
+    depends_on:
+      - agrologistics_db
+    links: 
+      - agrologistics_db
+    command: sh -c "node index.js"
     networks:
       net:
-        ipv4_address: 172.20.0.3  
+        ipv4_address: 172.30.0.3  
+  agrologistics_web:
+    container_name: agrologistics_web
+    build: ./webserver/
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - agrologistics_api
+    volumes:
+      - ./webserver:/app
+    environment:
+      FLASK_APP: '/app/agrologistics_web'
+    command: bash -c "cd /app/agrologistics_web && flask run --host=0.0.0.0"
+    networks:
+      net:
+        ipv4_address: 172.30.0.4  
 networks:
   net:
     driver: bridge
     ipam:
         driver: default
         config:
-            - subnet: 172.20.0.0/16
+            - subnet: 172.30.0.0/16

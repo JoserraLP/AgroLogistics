@@ -1,20 +1,22 @@
 import os
 
+import time
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_user import UserManager
 
-from .config import default
-from .static.constants import PRIVATE_KEY_DIR, PUBLIC_KEY_DIR
+from agrologistics_web.config import default
+
+from agrologistics_web.static.constants import PRIVATE_KEY_DIR, PUBLIC_KEY_DIR
 
 import rsa
 
-# init SQLAlchemy
 db = SQLAlchemy()
 
 def create_app():
-    ''' Create a Flask app, configure it. register some project blueprints as 'auth' or 'main', 
+    ''' Create a Flask app, configure it. register some project blueprints as 'auth' or 'main',
         initialize related services as SQLAlchemy (with data insertion) and the flask login manager.
 
         Returns:
@@ -22,35 +24,37 @@ def create_app():
 
     '''
 
+    time.sleep(300) # 5 minutes
+
     # Create Flask app
     app = Flask(__name__, instance_relative_config=True)
 
     # Configure the application with the config file
     app.config.from_object(default)
 
-    # Register project blueprints 
+    # Register project blueprints
 
     # -> Auth routes
-    from .auth import auth as auth_blueprint
+    from agrologistics_web.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    # -> Non-auth routes 
-    from .main import main as main_blueprint
+    # -> Non-auth routes
+    from agrologistics_web.main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    from .statistics import statistics as statistics_blueprint
+    from agrologistics_web.statistics import statistics as statistics_blueprint
     app.register_blueprint(statistics_blueprint)
 
-    from .schedule import schedule as schedule_blueprint
+    from agrologistics_web.schedule import schedule as schedule_blueprint
     app.register_blueprint(schedule_blueprint)
 
-    from .transaction import transaction as transaction_blueprint
+    from agrologistics_web.transaction import transaction as transaction_blueprint
     app.register_blueprint(transaction_blueprint)
 
     # Import models to create the tables
-    from .models import User, Role
+    from agrologistics_web.models import User, Role
 
-    # Init the Flask-User Manager service 
+    # Init the Flask-User Manager service
     user_manager = UserManager(app, db, User)
 
     # Init the SQLAlchemy - DB service
@@ -61,7 +65,7 @@ def create_app():
         db.create_all()
         # If there are no users and no roles create and insert them on the db
         if not User.query.limit(1).all() and not Role.query.limit(1).all():
-            from .utils.insert_data_to_db import insert_user_data
+            from agrologistics_web.utils.insert_data_to_db import insert_user_data
             insert_user_data(db)
 
     # Create the LoginManager
@@ -89,14 +93,5 @@ def create_app():
             fp.write(public_key.save_pkcs1().decode())
         with open(PRIVATE_KEY_DIR, 'w+') as fp:
             fp.write(private_key.save_pkcs1().decode())
-
-    '''
-    with open(PUBLIC_KEY_DIR, mode='rb') as public_file:
-        key_pub_data = public_file.read()
-        public_key = rsa.PublicKey.load_pkcs1(key_pub_data)
-
-        # Generate encrypted password
-        print(repr(rsa.encrypt("admin".encode('utf-8'), public_key)))
-    '''
 
     return app

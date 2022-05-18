@@ -1,4 +1,4 @@
-SERVER_API_URL = "http://localhost:8080"
+SERVER_API_URL = "http://172.30.0.3:8080"
 
 OCCUPIED_DAY_DICT = {
     '0': 'EMPTY',
@@ -38,5 +38,5 @@ PLOT_DAY_RANGE = {
     }
 }
 
-PUBLIC_KEY_DIR = "./WebServer/keys/pub_key.pem"
-PRIVATE_KEY_DIR = "./WebServer/keys/private_key.pem"
+PUBLIC_KEY_DIR = "../keys/pub_key.pem"
+PRIVATE_KEY_DIR = "../keys/private_key.pem"

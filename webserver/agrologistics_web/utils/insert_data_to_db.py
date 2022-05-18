@@ -3,8 +3,8 @@ import datetime
 import requests
 from sqlalchemy.dialects import sqlite
 
-from ..static.constants import SERVER_API_URL
-from ..models import User, Role
+from agrologistics_web.static.constants import SERVER_API_URL
+from agrologistics_web.models import User, Role
 
 
 def insert_user_data(db):

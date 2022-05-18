@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from . import db
+from agrologistics_web import db
 from sqlalchemy.dialects.oracle import BLOB
 
 

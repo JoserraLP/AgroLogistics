@@ -1,8 +1,8 @@
 import requests
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from flask_login import login_required, current_user
+from flask_login import login_required
 
-from .static.constants import SERVER_API_URL
+from agrologistics_web.static.constants import SERVER_API_URL
 
 # Transaction blueprint
 transaction = Blueprint('transaction', __name__)
