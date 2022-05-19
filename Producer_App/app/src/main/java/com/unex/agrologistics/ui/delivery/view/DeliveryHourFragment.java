@@ -48,11 +48,11 @@ public class DeliveryHourFragment extends Fragment {
         TextView logisticCenterName = root.findViewById(R.id.logisticCenterName);
 
         // Get the CenterProducerEventsViewModel
-        CenterProducerEventsViewModel eventsViewModel = new ViewModelProvider(this).get(
+        CenterProducerEventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(
                 CenterProducerEventsViewModel.class);
 
         // Get the CentersViewModel
-        CentersViewModel centersViewModel = new ViewModelProvider(this).get(
+        CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(
                 CentersViewModel.class);
 
         // Get selected and set UI fields values

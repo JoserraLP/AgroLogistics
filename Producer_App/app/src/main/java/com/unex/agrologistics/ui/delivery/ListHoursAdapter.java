@@ -75,8 +75,8 @@ public class ListHoursAdapter extends RecyclerView.Adapter<ListHoursAdapter.View
             holder.linearLayout.setOnClickListener(view -> {
                 // If clicked, create new event and set selected date
                 ProducerEvent newEvent = eventsViewModel.getNewEvent();
-                newEvent.setDate(eventsViewModel.getSelectedDate() + " " + hourItem.getHour()
-                        + ":00");
+                newEvent.setDate(eventsViewModel.getSelectedDate() + " " + hourItem.getHour() + ":00");
+                // newEvent.setDate(eventsViewModel.getSelectedDate() + "T" + hourItem.getHour() + ":00.000Z");
                 eventsViewModel.setNewEvent(newEvent);
 
                 // Move to event confirmation

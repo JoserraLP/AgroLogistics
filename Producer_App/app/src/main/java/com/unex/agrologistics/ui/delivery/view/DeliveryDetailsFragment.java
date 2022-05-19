@@ -75,7 +75,7 @@ public class DeliveryDetailsFragment extends Fragment {
         spinnerProducts.setAdapter(productsAdapter);
 
         // Get the CentersViewModel
-        CentersViewModel centersViewModel = new ViewModelProvider(this).get(
+        CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(
                 CentersViewModel.class);
 
         // Get selected and set UI fields values
@@ -83,7 +83,7 @@ public class DeliveryDetailsFragment extends Fragment {
                 logisticCenterName.setText(logisticCenterItem.getName()));
 
         // Get the ProductsViewModel
-        ProductsViewModel productsViewModel = new ViewModelProvider(this).get(
+        ProductsViewModel productsViewModel = new ViewModelProvider(requireActivity()).get(
                 ProductsViewModel.class);
 
         // Get all products and add them to the products adapter
@@ -102,7 +102,7 @@ public class DeliveryDetailsFragment extends Fragment {
         });
 
         // Get the CenterProducerEventsViewModel
-        CenterProducerEventsViewModel eventsViewModel = new ViewModelProvider(this).get(
+        CenterProducerEventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(
                 CenterProducerEventsViewModel.class);
 
         // Define on click for confirmation

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
+import com.unex.agrologistics.ui.delivery.viewmodel.ProductsViewModel;
 import com.unex.agrologistics.ui.events.ListEventsAdapter;
 import com.unex.agrologistics.ui.events.viewmodel.EventsViewModel;
 
@@ -40,6 +41,9 @@ public class EventsFragment extends Fragment {
         // Get the EventsViewModel
         @SuppressWarnings("deprecation") EventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(EventsViewModel.class);
 
+        // Get the ProductsViewModel
+        ProductsViewModel productsViewModel = new ViewModelProvider(requireActivity()).get(ProductsViewModel.class);
+
         // Get shared preferences
         SharedPreferences preferences = Objects.requireNonNull(this.getActivity()).
                 getSharedPreferences("LoggedUser", 0);
@@ -52,7 +56,7 @@ public class EventsFragment extends Fragment {
 
         // Create the ListEventsAdapter object
         ListEventsAdapter listEventsAdapter = new ListEventsAdapter(this.getContext(),
-                eventsViewModel);
+                eventsViewModel, productsViewModel);
 
         // Get all the events and save it to the adapter
         eventsViewModel.getAllProducerEvents().observe(requireActivity(),

@@ -47,4 +47,13 @@ public class ProducersViewModel extends AndroidViewModel {
     public LiveData<Producer> getProducerByEmail(String email) {
         return mRepository.getProducerByEmail(email);
     }
+
+    /**
+     * Get a producer given an id
+     * @param id Producer id to filter
+     * @return LiveData of the producer stored in the database with a given id
+     */
+    public LiveData<Producer> getProducerById(int id) {
+        return mRepository.getProducerById(id);
+    }
 }

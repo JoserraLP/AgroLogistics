@@ -167,7 +167,7 @@ public class ProducerEventRepository {
 
         producerEvent.setId(producerEventResponseItem.getId());
         producerEvent.setProduct_id(producerEventResponseItem.getProduct_id());
-        producerEvent.setProduct_name(producerEventResponseItem.getProducer_name());
+        producerEvent.setProduct_name(producerEventResponseItem.getProduct_name());
         producerEvent.setLogistic_center_id(producerEventResponseItem.getLogistic_center_id());
         producerEvent.setLogistic_center_name(producerEventResponseItem.getLogistic_center_name());
         producerEvent.setProducer_id(producerEventResponseItem.getProducer_id());

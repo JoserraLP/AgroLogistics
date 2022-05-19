@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_map">
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.unex.agrologistics.ui.delivery.view.DeliveryLogisticCenterFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_delivery_logistics_centers">
+
+        <action
+            android:id="@+id/action_nav_home_to_nav_news"
+            app:destination="@id/nav_news" />
+
+        <action
+            android:id="@+id/action_nav_home_to_nav_filter"
+            app:destination="@id/nav_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_delivery_details"
+        android:name="com.unex.agrologistics.ui.delivery.view.DeliveryDetailsFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_delivery_details" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_delivery_date"
+        android:name="com.unex.agrologistics.ui.delivery.view.DeliveryDateFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_center_item" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_delivery_hour"
+        android:name="com.unex.agrologistics.ui.delivery.view.DeliveryHourFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_delivery_hour" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_delivery_confirmation"
+        android:name="com.unex.agrologistics.ui.delivery.view.DeliveryConfirmationFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_delivery_confirmation" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_news"
+        android:name="com.unex.agrologistics.ui.events.view.EventsFragment"
+        android:label="@string/menu_news"
+        tools:layout="@layout/fragment_list_events" >
+        <action
+            android:id="@+id/action_nav_news_to_nav_news_item"
+            app:destination="@id/nav_news_item" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_news_item"
+        android:name="com.unex.agrologistics.ui.events.view.EventsItemFragment"
+        android:label="@string/menu_news"
+        tools:layout="@layout/fragment_events_info" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.unex.agrologistics.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.unex.agrologistics.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.unex.agrologistics.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
