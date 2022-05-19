@@ -61,7 +61,6 @@ public class DrawerActivity extends AppCompatActivity {
         ProducerEventRepository producerEventRepository =
                 ProducerEventRepository.getInstance(this.getApplication());
         producerEventRepository.loadProducerEvents();
-
     }
 
     /**

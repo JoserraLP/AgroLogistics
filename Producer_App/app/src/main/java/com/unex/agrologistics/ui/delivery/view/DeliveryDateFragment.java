@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,19 @@ public class DeliveryDateFragment extends Fragment implements OnNavigationButton
 
         super.onCreate(savedInstanceState);
 
+        Activity activity = getActivity();
+
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View v = activity.getCurrentFocus();
+
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (v == null) {
+            v = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
         // Inflate fragment
         View root = inflater.inflate(R.layout.fragment_center_item, container, false);
 
@@ -83,12 +97,12 @@ public class DeliveryDateFragment extends Fragment implements OnNavigationButton
         }
 
         // Get the CentersViewModel
-        CentersViewModel centersViewModel = new ViewModelProvider(this).get(
+        CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(
                 CentersViewModel.class);
 
         // Get the CenterProducerEventsViewModel
         CenterProducerEventsViewModel eventsViewModel = new
-                ViewModelProvider(this).get(CenterProducerEventsViewModel.class);
+                ViewModelProvider(requireActivity()).get(CenterProducerEventsViewModel.class);
 
         // Get selected and set UI fields values
         centersViewModel.getSelected().observe(requireActivity(), logisticCenterItem -> {
@@ -157,6 +171,12 @@ public class DeliveryDateFragment extends Fragment implements OnNavigationButton
         high.layoutResource = R.layout.high_events_view;
         high.dateTextViewResource = R.id.text_view;
         descHashMap.put("high",high);
+
+        // For full events date
+        Property full = new Property();
+        full.layoutResource = R.layout.full_events_view;
+        full.dateTextViewResource = R.id.text_view;
+        descHashMap.put("full",full);
 
         // Set custom calendar items
         customCalendar.setMapDescToProp(descHashMap);

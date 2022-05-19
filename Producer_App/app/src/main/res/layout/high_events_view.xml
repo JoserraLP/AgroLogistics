@@ -12,7 +12,7 @@
         android:layout_height="32dp"
         android:layout_margin="4dp"
         app:cardCornerRadius="4dp"
-        app:cardBackgroundColor="@android:color/holo_red_light">
+        app:cardBackgroundColor="@android:color/holo_orange_dark">
 
         <TextView
             android:layout_width="match_parent"

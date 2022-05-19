@@ -24,7 +24,11 @@ import com.unex.agrologistics.model.ProducerEvent;
 import com.unex.agrologistics.ui.delivery.viewmodel.CenterProducerEventsViewModel;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
 import com.unex.agrologistics.ui.delivery.viewmodel.ProductsViewModel;
+import com.unex.agrologistics.ui.login.ProducersViewModel;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 import okhttp3.MediaType;
@@ -65,18 +69,30 @@ public class DeliveryConfirmationFragment extends Fragment {
 
         // Get the CenterProducerEventsViewModel
         CenterProducerEventsViewModel eventsViewModel =
-                new ViewModelProvider(this).get(CenterProducerEventsViewModel.class);
+                new ViewModelProvider(requireActivity()).get(CenterProducerEventsViewModel.class);
 
         // Get the event created
         ProducerEvent newEvent = eventsViewModel.getNewEvent();
 
+        // Get shared preferences
+        SharedPreferences preferences = requireActivity().getSharedPreferences("LoggedUser",0);
+
+        // Retrieve producer id and name
+        int producerId = preferences.getInt("id", -1);
+        String producerName = preferences.getString("name", "");
+
+        // Set the producer id and name values
+        newEvent.setProducer_id(producerId);
+        newEvent.setProducer_name(producerName);
+
         // Get the CenterViewModel
-        CentersViewModel centersViewModel = new ViewModelProvider(this).get(
+        CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(
                 CentersViewModel.class);
 
-        // Get selected and set UI fields values
+        // Get selected and set logistic center name value
         centersViewModel.getSelected().observe(requireActivity(), logisticCenterItem -> {
             logisticCenterName.setText(logisticCenterItem.getName());
+            newEvent.setLogistic_center_name(logisticCenterItem.getName());
         });
 
         // Set the category value
@@ -114,39 +130,45 @@ public class DeliveryConfirmationFragment extends Fragment {
         // Set the hour value
         hourText.setText(date[1].substring(0,5));
 
+        // Get zone offset of the date
+        int year = Integer.parseInt(date[0].substring(0,4));
+        int month = Integer.parseInt(date[0].substring(5,7));
+        int day = Integer.parseInt(date[0].substring(8,10));
+        int hour = Integer.parseInt(date[1].substring(0,2));
+        int min = Integer.parseInt(date[1].substring(3,5));
+
+        ZoneId zone = ZoneId.of("Europe/Berlin");
+        ZoneOffset zoneOffSet = zone.getRules().getOffset(LocalDateTime.of(year, month, day, hour, min));
+
+        int newHour = Integer.parseInt(date[1].substring(0,2)) + zoneOffSet.getTotalSeconds()/3600;
+        newEvent.setDate(date[0] + " " + newHour + date[1].substring(2,5));
+
         // Set the price value
         // TODO default is 20
         newEvent.setPrice(20);
         priceText.setText(String.format("%s €", newEvent.getPrice()));
 
         // Get the ProductsViewModel
-        ProductsViewModel productsViewModel = new ViewModelProvider(this).get(
+        ProductsViewModel productsViewModel = new ViewModelProvider(requireActivity()).get(
                 ProductsViewModel.class);
 
         // Get product by id
         productsViewModel.getProductById(newEvent.getProduct_id()).observe(requireActivity(), product -> {
             productText.setText(product.getName());
+            newEvent.setProduct_name(product.getName());
         });
-
-        // Get shared preferences
-        SharedPreferences preferences = requireActivity().getSharedPreferences("LoggedUser",
-                0);
-
-        // Retrieve producer id
-        int producerId = preferences.getInt("id", -1);
-        newEvent.setProducer_id(producerId);
-
-        // Set new event
-        eventsViewModel.setNewEvent(newEvent);
 
         // On click perform the insertion on the DB and POST method
         confirm.setOnClickListener(v -> {
+
+            // Set new event
+            eventsViewModel.setNewEvent(newEvent);
 
             // Create POST method to API
             eventsViewModel.postProducerEvent();
 
             // Insert new event on the DB
-            eventsViewModel.insertProducerEvent();
+            // eventsViewModel.insertProducerEvent();
 
             // Start the drawer activity
             startActivity(new Intent(getActivity(), DrawerActivity.class));

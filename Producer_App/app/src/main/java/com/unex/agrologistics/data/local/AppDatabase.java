@@ -32,7 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     // Database name
-    private static final String DB_NAME = "app_agro.db";
+    private static final String DB_NAME = "app_agro6.db";
 
     // Callback for opening the db
     private static  Callback sAppDatabaseCallback = new Callback() {

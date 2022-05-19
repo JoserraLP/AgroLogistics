@@ -70,9 +70,7 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
         LogisticCenter logisticCenterItem = data.get(position);
 
         // Set values on UI fields
-        holder.logisticCenterId.setText("" + logisticCenterItem.getId());
         holder.logisticCenterName.setText(logisticCenterItem.getName());
-        holder.logisticCenterCapacity.setText("" + logisticCenterItem.getCapacity_kg());
 
         // Define onClick callback
         holder.linearLayout.setOnClickListener(view -> {
@@ -116,9 +114,7 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
     // ViewHolder class to represent the news in the adapter
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView logisticCenterId;
         private TextView logisticCenterName;
-        private TextView logisticCenterCapacity;
         private LinearLayout linearLayout;
 
         /**
@@ -128,9 +124,7 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
         ViewHolder(View itemView) {
             super(itemView);
 
-            logisticCenterId = itemView.findViewById(R.id.center_id);
             logisticCenterName = itemView.findViewById(R.id.center_name);
-            logisticCenterCapacity = itemView.findViewById(R.id.center_capacity);
             linearLayout = itemView.findViewById(R.id.layout_logisticCenter_item);
         }
     }

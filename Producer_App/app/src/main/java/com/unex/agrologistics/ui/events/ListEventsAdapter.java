@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
 import com.unex.agrologistics.model.ProducerEvent;
+import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
+import com.unex.agrologistics.ui.delivery.viewmodel.ProductsViewModel;
 import com.unex.agrologistics.ui.events.viewmodel.EventsViewModel;
 
 import java.util.ArrayList;
@@ -24,6 +26,9 @@ public class ListEventsAdapter extends RecyclerView.Adapter<ListEventsAdapter.Vi
     // EventsViewModel to retrieve the information
     private EventsViewModel eventsViewModel;
 
+    // EventsViewModel to retrieve the information
+    private ProductsViewModel productsViewModel;
+
     // Producer events data
     private ArrayList<ProducerEvent> data;
 
@@ -33,13 +38,15 @@ public class ListEventsAdapter extends RecyclerView.Adapter<ListEventsAdapter.Vi
     /**
      * ListEventsAdapter constructor
      * @param context Adapter context
-     * @param eventsViewModel NewsTypeViewModel
+     * @param eventsViewModel EventsViewModel
+     * @param productsViewModel ProductsViewModel
      */
-    public ListEventsAdapter(Context context, EventsViewModel eventsViewModel) {
+    public ListEventsAdapter(Context context, EventsViewModel eventsViewModel, ProductsViewModel productsViewModel) {
         // Initialize local variables
         this.context = context;
         this.data = new ArrayList<>();
         this.eventsViewModel = eventsViewModel;
+        this.productsViewModel = productsViewModel;
     }
 
     /**
@@ -67,16 +74,17 @@ public class ListEventsAdapter extends RecyclerView.Adapter<ListEventsAdapter.Vi
         ProducerEvent producerEventItem = data.get(position);
 
         // Define local strings to represent the information
-        String producer_event_id = "Product " + producerEventItem.getProduct_id() + ", " +
+        String producer_event_id = producerEventItem.getProduct_name() + ", " +
                 producerEventItem.getAmount_kg() + " kg";
         String producer_event_price = producerEventItem.getPrice() + " €";
         String producer_event_date = producerEventItem.getDate().substring(0,10) + " " +
-                producerEventItem.getDate().substring(12,16);
+                producerEventItem.getDate().substring(11,16);
+        String producer_event_center = producerEventItem.getLogistic_center_name();
 
         // Set values on UI fields
+        // holder.producerEventId.setText(producer_event_id + " - " + producer_event_price);
         holder.producerEventId.setText(producer_event_id);
-        holder.producerEventPrice.setText(producer_event_price);
-        holder.producerEventDate.setText(producer_event_date);
+        holder.producerEventPrice.setText(producer_event_center + ", " + producer_event_date);
 
         // Define onClick callback
         holder.linearLayout.setOnClickListener(view -> {
@@ -122,7 +130,6 @@ public class ListEventsAdapter extends RecyclerView.Adapter<ListEventsAdapter.Vi
 
         private TextView producerEventId;
         private TextView producerEventPrice;
-        private TextView producerEventDate;
         private LinearLayout linearLayout;
 
         /**
@@ -134,9 +141,7 @@ public class ListEventsAdapter extends RecyclerView.Adapter<ListEventsAdapter.Vi
 
             producerEventId = itemView.findViewById(R.id.event_product);
             producerEventPrice = itemView.findViewById(R.id.event_price);
-            producerEventDate = itemView.findViewById(R.id.event_date);
             linearLayout = itemView.findViewById(R.id.layout_news_item);
-
         }
     }
 

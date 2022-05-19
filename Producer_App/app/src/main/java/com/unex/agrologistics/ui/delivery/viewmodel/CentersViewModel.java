@@ -22,6 +22,8 @@ public class CentersViewModel extends AndroidViewModel {
     // Logistic centers repository
     LogisticCenterRepository mRepository;
 
+    private int id;
+
     /**
      * CentersViewModel constructor
      * @param application Application
@@ -71,5 +73,6 @@ public class CentersViewModel extends AndroidViewModel {
      */
     public void select(LogisticCenter logisticCenterItem) {
         selected.setValue(logisticCenterItem);
+        id = logisticCenterItem.getId();
     }
 }

@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Load the products
         ProductRepository productRepository = ProductRepository.getInstance(getApplication());
         productRepository.loadProducts();
-
     }
 
     /**
