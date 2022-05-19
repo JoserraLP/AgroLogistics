@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.delivery.view.DeliveryDetailsFragment">
+
+    <TextView
+        android:id="@+id/deliveryDetailsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Delivery Details"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/centerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Logistic Center"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/deliveryDetailsTitle" />
+
+    <TextView
+        android:id="@+id/centerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/centerLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/centerLabel" />
+
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Date"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/centerLabel" />
+
+    <TextView
+        android:id="@+id/dateInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dateLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/dateLabel" />
+
+    <TextView
+        android:id="@+id/hourLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Hour"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel" />
+
+    <TextView
+        android:id="@+id/hourInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/hourLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/hourLabel" />
+
+    <TextView
+        android:id="@+id/productLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Product"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/hourLabel" />
+
+    <TextView
+        android:id="@+id/productInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/productLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/productLabel" />
+
+    <TextView
+        android:id="@+id/categoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Category"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/productLabel" />
+
+    <TextView
+        android:id="@+id/categoryInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/categoryLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/categoryLabel"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <TextView
+        android:id="@+id/StorageTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Storage Type"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryLabel" />
+
+    <TextView
+        android:id="@+id/storageTypeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/StorageTypeLabel"
+        app:layout_constraintStart_toEndOf="@+id/centerLabel"
+        app:layout_constraintTop_toTopOf="@+id/StorageTypeLabel" />
+
+
+    <TextView
+        android:id="@+id/amountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Amount"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/StorageTypeLabel" />
+
+    <TextView
+        android:id="@+id/amountInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/amountLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/amountLabel" />
+
+    <TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Price"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/StorageTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/amountLabel" />
+
+    <TextView
+        android:id="@+id/priceInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/priceLabel"
+        app:layout_constraintStart_toStartOf="@+id/storageTypeInfo"
+        app:layout_constraintTop_toTopOf="@+id/priceLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.map.view.DeliveryDetailsFragment">
+
+    <TextView
+        android:id="@+id/deliveryDetailsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Delivery Details"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/finalCenterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Logistic Center"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/deliveryDetailsTitle" />
+
+    <EditText
+        android:id="@+id/finalCenter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalCenterText"
+        app:layout_constraintEnd_toEndOf="@+id/finalCategory"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalCenterText" />
+
+
+    <TextView
+        android:id="@+id/finalDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Date"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/finalCenterText" />
+
+    <EditText
+        android:id="@+id/finalDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalDateText"
+        app:layout_constraintEnd_toEndOf="@+id/finalCategory"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalDateText" />
+
+    <TextView
+        android:id="@+id/finalHourText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Hour"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/finalDateText" />
+
+    <EditText
+        android:id="@+id/finalHour"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalHourText"
+        app:layout_constraintEnd_toEndOf="@+id/finalCategory"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalHourText" />
+
+    <TextView
+        android:id="@+id/finalProductsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Product"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/finalHourText" />
+
+    <EditText
+        android:id="@+id/finalProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalProductsText"
+        app:layout_constraintEnd_toEndOf="@+id/finalCategory"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalProductsText" />
+
+    <TextView
+        android:id="@+id/finalCategoryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Category"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/finalProductsText" />
+
+    <EditText
+        android:id="@+id/finalCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalCategoryText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalCategoryText"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <TextView
+        android:id="@+id/finalStorageTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Storage Type"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalCategoryText" />
+
+    <EditText
+        android:id="@+id/finalStorageType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalStorageTypeText"
+        app:layout_constraintEnd_toEndOf="@+id/finalCategory"
+        app:layout_constraintStart_toEndOf="@+id/finalCenterText"
+        app:layout_constraintTop_toTopOf="@+id/finalStorageTypeText" />
+
+
+    <TextView
+        android:id="@+id/finalAmountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Amount"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/finalStorageTypeText" />
+
+    <TextView
+        android:id="@+id/kgText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="kg"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalAmountText"
+        app:layout_constraintStart_toEndOf="@+id/finalAmount"
+        app:layout_constraintTop_toTopOf="@+id/finalAmountText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/finalAmount"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalAmountText"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalAmountText" />
+
+    <TextView
+        android:id="@+id/finalPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Price"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageTypeText"
+        app:layout_constraintTop_toBottomOf="@+id/finalAmountText" />
+
+    <EditText
+        android:id="@+id/finalPrice"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalPriceText"
+        app:layout_constraintStart_toStartOf="@+id/finalStorageType"
+        app:layout_constraintTop_toTopOf="@+id/finalPriceText" />
+
+    <TextView
+        android:id="@+id/eurosText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="€"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalPriceText"
+        app:layout_constraintStart_toEndOf="@+id/finalPrice"
+        app:layout_constraintTop_toTopOf="@+id/finalPriceText"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+-->
