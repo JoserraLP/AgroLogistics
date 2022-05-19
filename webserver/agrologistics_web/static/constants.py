@@ -1,5 +1,6 @@
 SERVER_API_URL = "http://172.30.0.3:8080"
 
+# TODO hacer que dependa de cada centro logistico
 OCCUPIED_DAY_DICT = {
     '0': 'EMPTY',
     '1': 'LOW',

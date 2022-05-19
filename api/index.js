@@ -29,20 +29,19 @@ var options_object = {
 
 oasTools.configure(options_object);
 
-setTimeout(function() {
-    oasTools.initialize(oasDoc, app, function() {
+oasTools.initialize(oasDoc, app, function() {
 
-        http.createServer(app).listen(serverPort, serverAddress, function() {
-            console.log("App running at http://172.30.0.3:" + serverPort);
+    http.createServer(app).listen(serverPort, serverAddress, function() {
+        /*
+        console.log("App running at http://172.30.0.3:" + serverPort);
+        console.log("________________________________________________________________");
+        if (options_object.docs !== false) {
+            console.log('API docs (Swagger UI) available on http://172.30.0.3:' + serverPort + '/docs');
             console.log("________________________________________________________________");
-            if (options_object.docs !== false) {
-                console.log('API docs (Swagger UI) available on http://172.30.0.3:' + serverPort + '/docs');
-                console.log("________________________________________________________________");
-            }
-    
-        });
+        }
+        */
     });
-}, 300000); // 5 minutes
+});
 
 
 

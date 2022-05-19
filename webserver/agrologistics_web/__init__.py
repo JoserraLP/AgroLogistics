@@ -24,8 +24,6 @@ def create_app():
 
     '''
 
-    time.sleep(300) # 5 minutes
-
     # Create Flask app
     app = Flask(__name__, instance_relative_config=True)
 

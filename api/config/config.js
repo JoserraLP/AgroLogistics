@@ -8,4 +8,11 @@ const db = mysql.createConnection({
 	database:"agrologistics"
 });
 
+db.connect(function(err){
+	if (err) {
+		process.exit(-1);
+		//setTimeout(() => {process.exit(-1);}, 15000); // 15 seconds	
+	}
+})
+
 module.exports = db;

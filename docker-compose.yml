@@ -26,14 +26,12 @@ services:
   agrologistics_api:
     container_name: agrologistics_api
     build: ./api/
-    restart: always
+    restart: on-failure
     ports:
       - 8080:8080
     depends_on:
       - agrologistics_db
-    links: 
-      - agrologistics_db
-    command: sh -c "node index.js"
+    command: sh -c "node index.js > /dev/null 2>&1"
     networks:
       net:
         ipv4_address: 172.30.0.3  
@@ -48,8 +46,12 @@ services:
     volumes:
       - ./webserver:/app
     environment:
-      FLASK_APP: '/app/agrologistics_web'
-    command: bash -c "cd /app/agrologistics_web && flask run --host=0.0.0.0"
+      - FLASK_APP=/app/agrologistics_web
+      - WAIT_HOSTS=agrologistics_api:8080
+      - WAIT_HOSTS_TIMEOUT=150
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    command: bash -c "/wait && cd /app/agrologistics_web && flask run --host=0.0.0.0"
     networks:
       net:
         ipv4_address: 172.30.0.4  
