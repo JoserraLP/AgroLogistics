@@ -86,14 +86,16 @@ def select_options():
                        'info': 'Stocks\' evolution'}
     else:
         # Retrieve single statistics information
-        if product_id and product_category and selected_option in ['actual_stock', 'estimated_stock']:
-            # Retrieve additional parameters
+        if product_id and product_category:
             params.update({
                 'product_id': product_id,
                 'product_category': product_category
             })
-
-            data_label = json.dumps({'label': "Amount (kg)"})
+            # Retrieve additional parameters
+            if selected_option in ['actual_stock', 'estimated_stock']:
+                data_label = json.dumps({'label': "Amount (kg)"})
+            elif selected_option == 'price':
+                data_label = json.dumps({'label': "Price (€)"})
         else:
             data_label = json.dumps({'label': "Amount of events"})
 
@@ -101,7 +103,10 @@ def select_options():
                        'info': INFO_LABELS[selected_option]}
 
         # Perform request to retrieve information
-        info = requests.get(SERVER_API_URL + '/' + selected_option, params=params).json()['message']
+        if selected_option == 'price':
+            info = requests.get(SERVER_API_URL + '/producer_transaction', params=params).json()['message']
+        else:
+            info = requests.get(SERVER_API_URL + '/' + selected_option, params=params).json()['message']
 
         data = None
 
@@ -110,6 +115,7 @@ def select_options():
             data = json.dumps(process_info(start_date, actual_end_date, info, selected_option))
 
         plot_type = json.dumps({'type': 'bar'})
+        # plot_type = json.dumps({'type': 'line'})
 
     return render_template("statistics_data.html", data=data, labels_info=labels_info, data_label=data_label,
                            plot_type=plot_type)
@@ -160,12 +166,43 @@ def process_info(start_date, end_date, info, selected_option):
                     actual_date = actual_date + timedelta(hours=hour)
                     if selected_option in ['actual_stock', 'estimated_stock']:  # Retrieve the stock (amount kg)
                         # Append amount of stock
-                        stock_amount = [item['amount_kg'] for item in get_info_by_date(info, start_date, actual_date)]
-                        data[actual_date.strftime(day_limit_values['date_format'])] = float(sum(stock_amount))
+                        stock_amount = [item['amount_kg'] for item in
+                                                  get_info_by_date(info, start_date, actual_date)]
+
+                        if len(stock_amount) == 0:
+                            if not data:
+                                data[actual_date.strftime(day_limit_values['date_format'])] = 0
+                            else:
+                                data[actual_date.strftime(day_limit_values['date_format'])] = list(data.items())[-1][1]
+                        else:
+                            data[actual_date.strftime(day_limit_values['date_format'])] = float(sum(stock_amount))
+
+                    elif selected_option == 'price':  # Retrieve the price
+
+                        # Append amount of stock
+                        price_amount = sum([item['price'] for item in get_info_by_date(info, start_date, actual_date)])
+
+                        if price_amount == 0:
+                            if not data:
+                                data[actual_date.strftime(day_limit_values['date_format'])] = 0
+                            else:
+                                data[actual_date.strftime(day_limit_values['date_format'])] = list(data.items())[-1][1]
+                        else:
+                            data[actual_date.strftime(day_limit_values['date_format'])] = price_amount
+
                     elif selected_option == 'summary':
-                        # Append the capacity used
-                        stock_used = [item['amount_kg'] for item in get_info_by_date(info, start_date, actual_date)]
-                        data[actual_date.strftime(day_limit_values['date_format'])] = float(sum(stock_used))
+                        # Append amount of stock
+                        stock_amount = [item['amount_kg'] for item in
+                                        get_info_by_date(info, start_date, actual_date)]
+
+                        if len(stock_amount) == 0:
+                            if not data:
+                                data[actual_date.strftime(day_limit_values['date_format'])] = 0
+                            else:
+                                data[actual_date.strftime(day_limit_values['date_format'])] = list(data.items())[-1][1]
+                        else:
+                            data[actual_date.strftime(day_limit_values['date_format'])] = float(sum(stock_amount))
+
                     else:
                         # Append number of events
                         num_events = len(get_info_by_date(info, start_date, actual_date))
@@ -175,7 +212,7 @@ def process_info(start_date, end_date, info, selected_option):
                 actual_date = actual_date.replace(hour=0) + timedelta(days=1)
             # Only check first info that is valid
             break
-
+    print(data)
     return data
 
 

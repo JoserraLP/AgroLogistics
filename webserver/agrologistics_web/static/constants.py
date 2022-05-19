@@ -11,6 +11,7 @@ OCCUPIED_DAY_DICT = {
 INFO_LABELS = {
     'actual_stock': 'Actual stock',
     'estimated_stock': 'Estimated stock',
+    'price': 'Price',
     'consumer_event': 'Consumer events',
     'consumer_transaction': 'Consumer transactions',
     'producer_event': 'Producer events',

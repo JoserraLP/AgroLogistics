@@ -31,30 +31,10 @@ services:
       - 8080:8080
     depends_on:
       - agrologistics_db
-    command: sh -c "node index.js > /dev/null 2>&1"
+    command: sh -c "node index.js"
     networks:
       net:
         ipv4_address: 172.30.0.3  
-  agrologistics_web:
-    container_name: agrologistics_web
-    build: ./webserver/
-    restart: always
-    ports:
-      - 5000:5000
-    depends_on:
-      - agrologistics_api
-    volumes:
-      - ./webserver:/app
-    environment:
-      - FLASK_APP=/app/agrologistics_web
-      - WAIT_HOSTS=agrologistics_api:8080
-      - WAIT_HOSTS_TIMEOUT=150
-      - WAIT_SLEEP_INTERVAL=30
-      - WAIT_HOST_CONNECT_TIMEOUT=30
-    command: bash -c "/wait && cd /app/agrologistics_web && flask run --host=0.0.0.0"
-    networks:
-      net:
-        ipv4_address: 172.30.0.4  
 networks:
   net:
     driver: bridge
