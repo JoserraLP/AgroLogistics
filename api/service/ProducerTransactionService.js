@@ -140,7 +140,8 @@ module.exports.postProducerTransaction = function(req, res, next) {
                                 ' WHERE c_t.product_id = ' + req.undefined.originalValue.product_id +
                                 ' AND c_t.logistic_center_id = ' + req.undefined.originalValue.logistic_center_id + ' AND c_t.product_category = "' +
                                 req.undefined.originalValue.product_category + "\" AND DATE(c_t.date) < '" + req.undefined.originalValue.date  + '\' ' +
-                                ' ) AS stock;'
+                                ' ) AS stock GROUP BY product_id, logistic_center_id, product_category;;'
+
     
     // Create new value based on the previous information
     connection.query(previous_stock_query, function (error, results, fields) {

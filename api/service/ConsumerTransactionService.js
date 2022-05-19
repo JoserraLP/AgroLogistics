@@ -140,7 +140,7 @@ module.exports.postConsumerTransaction = function(req, res, next) {
                                 ' WHERE product_id = ' + req.undefined.originalValue.product_id +
                                 ' AND logistic_center_id = ' + req.undefined.originalValue.logistic_center_id + ' AND product_category = "' +
                                 req.undefined.originalValue.product_category + "\" AND DATE(date) < '" + req.undefined.originalValue.date  + '\' ' +
-                                ' ) AS stock;'
+                                ' ) AS stock GROUP BY product_id, logistic_center_id, product_category;'
     
 
     // Create new value based on the previous information
