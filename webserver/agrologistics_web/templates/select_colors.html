@@ -12,40 +12,56 @@
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="option">Information:</label>
                     <select name="option" required>
-                        <option value="" disabled selected hidden>Choose an option</option>
-                        <option value="num_events">Number of events</option>
-                        <option value="capacity_kg">Capacity</option>
+                        {% if user_option == 'num_events' %}
+                            <option value="" disabled hidden>Choose an option</option>
+                            <option value="num_events" selected>Number of events</option>
+                            <option value="capacity_kg">Capacity</option>
+                        {% elif user_option == 'capacity_kg' %}
+                            <option value="" disabled hidden>Choose an option</option>
+                            <option value="num_events">Number of events</option>
+                            <option value="capacity_kg" selected>Capacity</option>
+                        {% else %}
+                            <option value="" disabled selected hidden>Choose an option</option>
+                            <option value="num_events">Number of events</option>
+                            <option value="capacity_kg">Capacity</option>
+                        {% endif %}
                     </select>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="first_value">First value:</label>
-                    <input class="col-8 text-left" type="number" id="first_value" name="first_value" required>
+                    <input class="col-8 text-left" type="number" id="first_value" name="first_value" required
+                           value="{{ user_colors_dict[1][0] }}">
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="first_color">First color:</label>
-                    <input class="col-8 text-left" type="color" id="first_color" name="first_color" required>
+                    <input class="col-8 text-left" type="color" id="first_color" name="first_color" required
+                    value="{{ user_colors_dict[1][1] }}">
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="second_value">Second value:</label>
-                    <input class="col-8 text-left" type="number" id="second_value" name="second_value" required>
+                    <input class="col-8 text-left" type="number" id="second_value" name="second_value" required
+                    value="{{ user_colors_dict[2][0] }}">
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="second_color">Second color:</label>
-                    <input class="col-8 text-left" type="color" id="second_color" name="second_color" required>
+                    <input class="col-8 text-left" type="color" id="second_color" name="second_color" required
+                    value="{{ user_colors_dict[2][1] }}">
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="third_value">Third value:</label>
-                    <input class="col-8 text-left" type="number" id="third_value" name="third_value" required>
+                    <input class="col-8 text-left" type="number" id="third_value" name="third_value" required
+                    value="{{ user_colors_dict[3][0] }}">
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 text-left mt-1" for="third_color">Third color:</label>
-                    <input class="col-8 text-left" type="color" id="third_color" name="third_color" required value="">
+                    <input class="col-8 text-left" type="color" id="third_color" name="third_color" required
+                    value="{{ user_colors_dict[3][1] }}">
                 </div>
 
                 <input class="mt-2 btn btn-dark" type="submit" value="Update">

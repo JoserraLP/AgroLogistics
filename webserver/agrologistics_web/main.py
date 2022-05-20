@@ -46,7 +46,15 @@ def select_colors():
     ''' Select range colors for schedule.'''
 
     if request.method == 'GET':
-        return render_template('select_colors.html')
+        # Search user in the db
+        user = User.query.filter_by(name=current_user.name).first()
+
+        user_option, user_colors = user.colors.split('#')
+
+        user_colors_dict = [(value[0], parse_rgb_to_hex(value[1])) for value in
+                            [item.split(':') for item in user_colors.split(';')]]
+
+        return render_template('select_colors.html', user_option=user_option, user_colors_dict=user_colors_dict)
     elif request.method == 'POST':
         form_values = request.form.to_dict()
 
@@ -68,3 +76,7 @@ def select_colors():
 
 def parse_hex_to_rgb(color):
     return 'rgb' + str(tuple(int(color[i:i + 2], 16) for i in (0, 2, 4)))
+
+
+def parse_rgb_to_hex(color):
+    return '#%02x%02x%02x' % tuple([int(x) for x in color.replace('rgb', '').replace('(', '').replace(')', '').split(',')])
