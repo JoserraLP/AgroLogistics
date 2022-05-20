@@ -1,12 +1,6 @@
-SERVER_API_URL = "http://172.30.0.3:8080"
+# SERVER_API_URL = "http://172.30.0.3:8080"
 
-# TODO hacer que dependa de cada centro logistico
-OCCUPIED_DAY_DICT = {
-    '0': 'EMPTY',
-    '1': 'LOW',
-    '5': 'MEDIUM',
-    '10': 'FULL'
-}
+SERVER_API_URL = "http://localhost:8080"
 
 INFO_LABELS = {
     'actual_stock': 'Actual stock',
@@ -40,5 +34,5 @@ PLOT_DAY_RANGE = {
     }
 }
 
-PUBLIC_KEY_DIR = "../keys/pub_key.pem"
-PRIVATE_KEY_DIR = "../keys/private_key.pem"
+PUBLIC_KEY_DIR = "./webserver/keys/pub_key.pem"
+PRIVATE_KEY_DIR = "./webserver/keys/private_key.pem"

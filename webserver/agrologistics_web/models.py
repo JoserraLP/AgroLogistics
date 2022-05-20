@@ -32,6 +32,10 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(100))
     capacity_kg = db.Column(db.Float)
     cooled_capacity_kg = db.Column(db.Float)
+    # Datatype#first_value:first_color;second_value:second_color;third_value:third_color;
+    # Datatype can be: num_events or capacity
+    colors = db.Column(db.String(100))
+
 
     # Necessary to Flask user
     email_confirmed_at = db.Column(db.DateTime())

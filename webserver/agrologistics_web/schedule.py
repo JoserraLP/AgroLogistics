@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_login import login_required, current_user
 from datetime import datetime
-from agrologistics_web.static.constants import SERVER_API_URL, OCCUPIED_DAY_DICT
+
+from agrologistics_web.models import User
+from agrologistics_web.static.constants import SERVER_API_URL
 
 import requests
 import calendar
@@ -23,7 +25,7 @@ def calc_calendar(date):
     return yearInfo
 
 
-def process_day_info(month_id, month_days, data):
+def process_day_info(month_id, month_days, data, user_colors_dict, user_option):
     for week_idx, week in enumerate(month_days):
         for day_idx, day in enumerate(week):
             if day != 0:
@@ -37,8 +39,14 @@ def process_day_info(month_id, month_days, data):
                 # Retrieve only data related to the day
                 day_data = [item for item in data if concat_date in item['date']]
 
-                num_events = len(day_data)
-                occupied_degree = [v for k, v in OCCUPIED_DAY_DICT.items() if int(k) <= num_events][-1]
+                if user_option == 'num_events':
+                    num_events = len(day_data)
+                    occupied_degree = [v for k, v in user_colors_dict.items() if int(k) <= num_events][-1]
+                elif user_option == 'capacity_kg':
+                    capacity = sum([v for item in day_data for k, v in item.items() if k == 'amount_kg'])
+                    occupied_degree = [v for k, v in user_colors_dict.items() if int(k) <= capacity][-1]
+                else:
+                    occupied_degree = []
 
                 month_days[week_idx][day_idx] = {
                     'day': day,
@@ -92,7 +100,15 @@ def consumer_schedule():
     # Perform request to retrieve number of consumer events
     consumer_events = requests.get(SERVER_API_URL + '/consumer_event', params=params)
 
-    days = process_day_info(month, days, consumer_events.json()['message'])
+    # User colors
+    user = User.query.filter_by(name=current_user.name).first()
+
+    user_option, user_colors = user.colors.split('#')
+
+    user_colors_dict = {value[0]: value[1] for value in [item.split(':') for item in user_colors.split(';')]}
+
+    days = process_day_info(month, days, consumer_events.json()['message'], user_colors_dict=user_colors_dict,
+                            user_option=user_option)
 
     return render_template('schedule.html', calendar=days, month_name=month_name, month_num=month,
                            schedule_type="consumer")

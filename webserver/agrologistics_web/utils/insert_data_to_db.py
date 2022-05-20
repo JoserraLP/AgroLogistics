@@ -29,7 +29,8 @@ def insert_user_data(db):
                 name=logistic_center['name'],
                 capacity_kg=logistic_center['capacity_kg'],
                 cooled_capacity_kg=logistic_center['cooled_capacity_kg'],
-                email_confirmed_at=datetime.datetime.utcnow()
+                email_confirmed_at=datetime.datetime.utcnow(),
+                colors="num_events#0:rgb(255, 255, 255);1:rgb(246, 21, 21);5:rgb(248, 147, 110);10:rgb(134, 134, 134)" # Default color
             )
 
             user.roles.append(logistic_center_rol)

@@ -42,22 +42,14 @@
                 {% if day == 0 %}
                     <td>&nbsp</td>
                 {% else %}
-                    {% if day['occupied_degree'] == 'EMPTY' %}
-                    <td>
-                    {% elif day['occupied_degree'] == 'LOW' %}
-                    <td class = "bg-light-green">
-                    {% elif day['occupied_degree'] == 'MEDIUM' %}
-                    <td class = "bg-orange">
-                    {% elif day['occupied_degree'] == 'FULL' %}
-                    <td class = "bg-light-red">
+                    <td style="background: {{ day['occupied_degree'] }}">
+                    {% if schedule_type == "consumer" %}
+                    <a class="btn text-decoration-none" href="{{ url_for('schedule.consumer_day', day=day['day'],
+                        month=month_num) }}"><div>{{ day['day'] }}</div></a>
+                    {% elif schedule_type == "producer" %}
+                    <a class="btn text-decoration-none" href="{{ url_for('schedule.producer_day', day=day['day'],
+                        month=month_num) }}"><div>{{ day['day'] }}</div></a>
                     {% endif %}
-                        {% if schedule_type == "consumer" %}
-                        <a class="btn text-decoration-none" href="{{ url_for('schedule.consumer_day', day=day['day'],
-                            month=month_num) }}"><div>{{ day['day'] }}</div></a>
-                        {% elif schedule_type == "producer" %}
-                        <a class="btn text-decoration-none" href="{{ url_for('schedule.producer_day', day=day['day'],
-                            month=month_num) }}"><div>{{ day['day'] }}</div></a>
-                        {% endif %}
                     </td>
                 {% endif %}
             {% endfor %}
