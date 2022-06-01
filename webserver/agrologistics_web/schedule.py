@@ -183,7 +183,15 @@ def producer_schedule():
     # Perform request to retrieve number of producer events
     producer_events = requests.get(SERVER_API_URL + '/producer_event', params=params)
 
-    days = process_day_info(month, days, producer_events.json()['message'])
+    # User colors
+    user = User.query.filter_by(name=current_user.name).first()
+
+    user_option, user_colors = user.colors.split('#')
+
+    user_colors_dict = {value[0]: value[1] for value in [item.split(':') for item in user_colors.split(';')]}
+
+    days = process_day_info(month, days, producer_events.json()['message'], user_colors_dict=user_colors_dict,
+                            user_option=user_option)
 
     return render_template('schedule.html', calendar=days, month_name=month_name, month_num=month,
                            schedule_type="producer")

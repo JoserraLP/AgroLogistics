@@ -41,7 +41,6 @@ def select_options():
 
     if selected_option == 'summary':
         # Process the data
-        data = {}
 
         # Perform request to retrieve total actual stock
         actual_stock = requests.get(SERVER_API_URL + '/actual_stock', params=params).json()['message']
@@ -80,10 +79,6 @@ def select_options():
         # Three different kind of information
         data_label = json.dumps({'label': ['Actual Stock (Global)', 'Estimated Stock (Global)', 'Maximum capacity']})
 
-        plot_type = json.dumps({'type': 'line'})
-
-        labels_info = {'date': "from " + start_date + " to " + end_date if start_date != end_date else str(start_date),
-                       'info': 'Stocks\' evolution'}
     else:
         # Retrieve single statistics information
         if product_id and product_category:
@@ -93,14 +88,11 @@ def select_options():
             })
             # Retrieve additional parameters
             if selected_option in ['actual_stock', 'estimated_stock']:
-                data_label = json.dumps({'label': "Amount (kg)"})
+                data_label = json.dumps({'label': ["Amount (kg)", "Maximum capacity"]})
             elif selected_option == 'price':
-                data_label = json.dumps({'label': "Price (€)"})
+                data_label = json.dumps({'label': ["Price (€)"]})
         else:
-            data_label = json.dumps({'label': "Amount of events"})
-
-        labels_info = {'date': "from " + start_date + " to " + end_date if start_date != end_date else str(start_date),
-                       'info': INFO_LABELS[selected_option]}
+            data_label = json.dumps({'label': ["Amount of events"]})
 
         # Perform request to retrieve information
         if selected_option == 'price':
@@ -112,10 +104,33 @@ def select_options():
 
         if statistics:
             # Process the data to show
-            data = json.dumps(process_info(start_date, actual_end_date, info, selected_option))
+            data = process_info(start_date, actual_end_date, info, selected_option)
 
-        plot_type = json.dumps({'type': 'bar'})
-        # plot_type = json.dumps({'type': 'line'})
+            # Perform request to retrieve maximum capacity of the logistic center
+            logistic_center = requests.get(SERVER_API_URL + '/logistic_center',
+                                           params={'id': current_user.id}).json()['message'][0]
+
+            # Retrieve maximum capacity
+            maximum_capacity = logistic_center['capacity_kg']
+
+            for k, v in data.items():
+                if selected_option == 'price' or 'event' in selected_option or 'transaction' in selected_option:
+                    data[k] = {
+                        selected_option: v
+                    }
+                else:
+                    data[k] = {
+                        selected_option: v,
+                        'capacity': maximum_capacity
+                    }
+
+            # Store in JSON
+            data = json.dumps(data)
+
+    labels_info = {'date': "from " + start_date + " to " + end_date if start_date != end_date else str(start_date),
+                   'info': INFO_LABELS[selected_option]}
+
+    plot_type = json.dumps({'type': 'line'})
 
     return render_template("statistics_data.html", data=data, labels_info=labels_info, data_label=data_label,
                            plot_type=plot_type)
@@ -212,7 +227,6 @@ def process_info(start_date, end_date, info, selected_option):
                 actual_date = actual_date.replace(hour=0) + timedelta(days=1)
             # Only check first info that is valid
             break
-    print(data)
     return data
 
 

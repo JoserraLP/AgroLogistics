@@ -48,35 +48,51 @@
                                 }
 
                             } else if (chartType === "line") {
-                                values = {'actual_stock': [], 'estimated_stock': [], 'capacity': []};
-                                for (let k in data) {
-                                    labels.push(k);
-                                    values['estimated_stock'].push(data[k]['estimated_stock']);
-                                    values['actual_stock'].push(data[k]['actual_stock']);
-                                    values['capacity'].push(data[k]['capacity']);
-                                    // Retrieve maximum Y based on the capacity
-                                    if (maximumY <= data[k]['capacity'])
-                                        maximumY = data[k]['capacity']*2;
+                                // Create a values with the keys of the data
+                                const keys = Object.keys(data[Object.keys(data)[0]]);
+                                values = {};
+
+                                keys.forEach(function (item, index) {
+                                  values[item] = [];
+                                });
+                                for (let date in data) {
+                                    labels.push(date);
+                                    // Append the data
+                                    keys.forEach(function (item, index) {
+                                        values[item].push(data[date][item]);
+                                    });
+
+                                    // Only use capacity when required
+                                    if (keys.includes("estimated_stock") || keys.includes("actual_stock")) {
+                                        // Retrieve maximum Y based on the capacity
+                                        if (maximumY <= data[date]['capacity'])
+                                            maximumY = data[date]['capacity'] * 1.5;
+                                    }else if (keys.includes("price")) {
+                                        maximumY = data[date]['price']*1.5;
+                                    }else {
+                                        // Events -> Maximum is 28
+                                        maximumY = 28;
+
+                                    }
                                 }
+
+                                // Define some line colors
+                                const colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#61c97d", "#196cb0", "#6719b0"]
+
+                                // Retrieve datasets
+                                let datasets = []
+                                keys.forEach(function (item, index) {
+                                    datasets.push({
+                                        data: values[item],
+                                        label: label['label'][index],
+                                        borderColor: colors[index],
+                                        fill: false
+                                    })
+                                });
 
                                 chartData = {
                                     labels: labels,
-                                    datasets: [{
-                                        data: values['actual_stock'],
-                                        label: label['label'][0],
-                                        borderColor: "#3e95cd",
-                                        fill: false
-                                      }, {
-                                        data: values['estimated_stock'],
-                                        label: label['label'][1],
-                                        borderColor: "#8e5ea2",
-                                        fill: false
-                                      }, {
-                                        data: values['capacity'],
-                                        label: label['label'][2],
-                                        borderColor: "#3cba9f",
-                                        fill: false
-                                      }]
+                                    datasets: datasets
                                 }
                             }
 
