@@ -30,23 +30,31 @@
                     <p class="col">Amount (KG): {{ event['amount_kg'] }}</p>
                     <p class="col">Date: {{ event['date'] }}</p>
                 </div>
-                {% if not event['blocked'] %}
-                    {% if schedule_type == "consumer" %}
-                    <a class="btn btn-dark" href="{{url_for('transaction.add_consumer_transaction',
-                    event_id=event['id'])}}">Create transaction</a>
-                    {% elif schedule_type == "producer" %}
-                    <a class="btn btn-dark" href="{{url_for('transaction.add_producer_transaction',
-                    event_id=event['id'])}}">Create transaction</a>
+                <div class="row">
+                    <p class="col">Price: {{ event['price'] }} (€)</p>
+                    <p class="col">Storage type: {{ event['storage_type'] }}</p>
+                </div>
+                <div class="row">
+                    <p class="col pb-3">
+                    {% if not event['blocked'] %}
+                        {% if schedule_type == "consumer" %}
+                        <a class="btn btn-dark" href="{{url_for('transaction.add_consumer_transaction',
+                        event_id=event['id'])}}">Create transaction</a>
+                        {% elif schedule_type == "producer" %}
+                        <a class="btn btn-dark" href="{{url_for('transaction.add_producer_transaction',
+                        event_id=event['id'])}}">Create transaction</a>
+                        {% endif %}
+                    {% else %}
+                        {% if schedule_type == "consumer" %}
+                        <a class="btn btn-dark" href="{{url_for('transaction.see_consumer_transaction',
+                        id=event['id'])}}">See transaction</a>
+                        {% elif schedule_type == "producer" %}
+                        <a class="btn btn-dark" href="{{url_for('transaction.see_producer_transaction',
+                        id=event['id'])}}">See transaction</a>
+                        {% endif %}
                     {% endif %}
-                {% else %}
-                    {% if schedule_type == "consumer" %}
-                    <a class="btn btn-dark" href="{{url_for('transaction.see_consumer_transaction',
-                    id=event['id'])}}">See transaction</a>
-                    {% elif schedule_type == "producer" %}
-                    <a class="btn btn-dark" href="{{url_for('transaction.see_producer_transaction',
-                    id=event['id'])}}">See transaction</a>
-                    {% endif %}
-                {% endif %}
+                    </p>
+                </div>
             </div>
         </div>
 
