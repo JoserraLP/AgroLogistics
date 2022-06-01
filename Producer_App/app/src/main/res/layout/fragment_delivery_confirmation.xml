@@ -204,17 +204,20 @@
         app:layout_constraintStart_toStartOf="@+id/finalAmountText"
         app:layout_constraintTop_toBottomOf="@+id/finalAmountText" />
 
-    <TextView
+    <EditText
         android:id="@+id/finalPrice"
-        android:layout_width="0dp"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="20dp"
         android:ems="10"
-        android:textSize="17dp"
+        android:textColor="#8a000000"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/finalPriceText"
         app:layout_constraintEnd_toEndOf="@+id/finalStorageType"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/finalStorageType"
-        app:layout_constraintTop_toTopOf="@+id/finalPriceText" />
+        app:layout_constraintTop_toTopOf="@+id/finalPriceText"
+        app:layout_constraintVertical_bias="0.523" />
 
     <Button
         android:id="@+id/confirmDetailsButton"

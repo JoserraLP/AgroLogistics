@@ -14,8 +14,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
+import com.unex.agrologistics.data.repository.ProducerEventRepository;
 import com.unex.agrologistics.ui.delivery.ListCentersAdapter;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
+
+import java.util.Objects;
 
 public class DeliveryLogisticCenterFragment extends Fragment {
 
@@ -31,7 +34,6 @@ public class DeliveryLogisticCenterFragment extends Fragment {
 
         // Inflate fragment
         View root = inflater.inflate(R.layout.fragment_delivery_logistics_centers, container, false);
-
 
         // Get the EventsViewModel
         CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(

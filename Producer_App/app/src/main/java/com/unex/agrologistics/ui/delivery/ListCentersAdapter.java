@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
+import com.unex.agrologistics.data.repository.ProducerEventRepository;
 import com.unex.agrologistics.model.LogisticCenter;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
 
@@ -41,6 +42,11 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
         this.context = context;
         this.data = new ArrayList<>();
         this.centersViewModel = centersViewModel;
+        // Load producer events
+        // Repository to load data
+        ProducerEventRepository producerEventRepository =
+                ProducerEventRepository.getInstance(this.centersViewModel.getApplication());
+        producerEventRepository.loadProducerEvents();
     }
 
     /**
@@ -55,6 +61,7 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
         // Inflate the layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_logistic_center,
                 parent, false);
+
         return new ListCentersAdapter.ViewHolder(view);
     }
 

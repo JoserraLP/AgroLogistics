@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class DeliveryConfirmationFragment extends Fragment {
         // Get context
         context = getContext();
 
+        this.requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         // UI fields
         TextView logisticCenterName = root.findViewById(R.id.logisticCenterName);
         EditText dateText = root.findViewById(R.id.finalDate);
@@ -56,7 +59,7 @@ public class DeliveryConfirmationFragment extends Fragment {
         EditText categoryText = root.findViewById(R.id.finalCategory);
         EditText storageTypeText = root.findViewById(R.id.finalStorageType);
         EditText amountText = root.findViewById(R.id.finalAmount);
-        TextView priceText = root.findViewById(R.id.finalPrice);
+        EditText priceText = root.findViewById(R.id.finalPrice);
         Button confirm = root.findViewById(R.id.confirmDetailsButton);
 
         // Set UI fields status
@@ -66,6 +69,7 @@ public class DeliveryConfirmationFragment extends Fragment {
         categoryText.setEnabled(false);
         storageTypeText.setEnabled(false);
         amountText.setEnabled(false);
+        priceText.setEnabled(true);
 
         // Get the CenterProducerEventsViewModel
         CenterProducerEventsViewModel eventsViewModel =
@@ -143,9 +147,8 @@ public class DeliveryConfirmationFragment extends Fragment {
         int newHour = Integer.parseInt(date[1].substring(0,2)) + zoneOffSet.getTotalSeconds()/3600;
         newEvent.setDate(date[0] + " " + newHour + date[1].substring(2,5));
 
-        // Set the price value
-        // TODO default is 20
-        newEvent.setPrice(20);
+        // Set the price value -> Default to 10
+        newEvent.setPrice(10);
         priceText.setText(String.format("%s €", newEvent.getPrice()));
 
         // Get the ProductsViewModel

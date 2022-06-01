@@ -56,11 +56,8 @@ public class DrawerActivity extends AppCompatActivity {
         if (languageCode != null && !languageCode.equals(Locale.getDefault().getLanguage()))
             putLanguage(languageCode);
 
-        // Load producer events
-        // Repository to load data
-        ProducerEventRepository producerEventRepository =
-                ProducerEventRepository.getInstance(this.getApplication());
-        producerEventRepository.loadProducerEvents();
+
+
     }
 
     /**
