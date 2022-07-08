@@ -3,6 +3,7 @@ package com.unex.agrologistics.ui.delivery.view;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,9 @@ import androidx.navigation.Navigation;
 
 import com.unex.agrologistics.R;
 import com.unex.agrologistics.model.ConsumerEvent;
-import com.unex.agrologistics.model.ProducerEvent;
-import com.unex.agrologistics.ui.delivery.viewmodel.CenterProducerEventsViewModel;
+import com.unex.agrologistics.model.EstimatedStock;
+import com.unex.agrologistics.ui.delivery.viewmodel.CenterConsumerEventsViewModel;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
-
 import org.naishadhparmar.zcustomcalendar.CustomCalendar;
 import org.naishadhparmar.zcustomcalendar.OnNavigationButtonClickedListener;
 import org.naishadhparmar.zcustomcalendar.Property;
@@ -28,6 +28,10 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.unex.agrologistics.utils.Constants.FULL_EVENTS_NUM;
+import static com.unex.agrologistics.utils.Constants.HIGH_EVENTS_NUM;
+import static com.unex.agrologistics.utils.Constants.MEDIUM_EVENTS_NUM;
 
 public class DeliveryDateFragment extends Fragment implements OnNavigationButtonClickedListener {
 
@@ -99,9 +103,9 @@ public class DeliveryDateFragment extends Fragment implements OnNavigationButton
         CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(
                 CentersViewModel.class);
 
-        // Get the CenterProducerEventsViewModel
-        CenterProducerEventsViewModel eventsViewModel = new
-                ViewModelProvider(requireActivity()).get(CenterProducerEventsViewModel.class);
+        // Get the CenterConsumerEventsViewModel
+        CenterConsumerEventsViewModel eventsViewModel = new
+                ViewModelProvider(requireActivity()).get(CenterConsumerEventsViewModel.class);
 
         // Get selected and set UI fields values
         centersViewModel.getSelected().observe(requireActivity(), logisticCenterItem -> {
@@ -121,32 +125,53 @@ public class DeliveryDateFragment extends Fragment implements OnNavigationButton
             else fin = "2022-"+ i + "-01";
             i--;
 
-            // Get producer events from logistic center by date
-            eventsViewModel.getConsumerEventsFromLogisticCenterByDate(ini,fin).observe(
+            final int month = i;
+
+            // Map to store a day and the number of events (per month)
+            HashMap<String, Integer> eventsPerDay = new HashMap<>();
+
+
+            // Get consumer events from logistic center by month
+            eventsViewModel.getConsumerEventsFromLogisticCenterByDate(ini, fin).observe(
                     requireActivity(), consumerEventsList -> {
 
-                // If there are producer events
-                if(consumerEventsList.size()>0){
-                    // Get month
-                    int month = Integer.parseInt(consumerEventsList.get(0).getDate().substring(5,7));
+                        // Iterate over the producer events
+                        for (ConsumerEvent consumerEvent : consumerEventsList){
+                            String consumerEventDay = consumerEvent.getDate().substring(8, 10);
+                            // Update current counter or initialize
+                            if (eventsPerDay.containsKey(consumerEventDay))
+                                eventsPerDay.put(consumerEventDay, eventsPerDay.get(consumerEventDay)+1);
+                            else
+                                eventsPerDay.put(consumerEventDay, 1);
 
-                    Map<Integer, Object>[] arr = (Map<Integer, Object>[]) maps.get(month-1);
+                        }
 
+                        Map<Integer, Object>[] arr = (Map<Integer, Object>[]) maps.get(month - 1);
 
-                    // Set the day to medium occupied
-                    for (ConsumerEvent consumerEvent : consumerEventsList)
-                        arr[0].put(Integer.parseInt(consumerEvent.getDate().substring(8, 10)),
-                                "medium");
+                        for (String key : eventsPerDay.keySet()) {
+                            String occupancy;
+                            int numEvents = eventsPerDay.get(key);
 
-                    // Put the new array
-                    maps.put(month-1,arr);
+                            if (0 < numEvents && numEvents <= MEDIUM_EVENTS_NUM)
+                                occupancy = "medium";
+                            else if (MEDIUM_EVENTS_NUM < numEvents && numEvents <= HIGH_EVENTS_NUM)
+                                occupancy = "high";
+                            else if (HIGH_EVENTS_NUM < numEvents && numEvents <= FULL_EVENTS_NUM)
+                                occupancy = "full";
+                            else
+                                occupancy = "low";
 
-                    // Set month dates to the calendar
-                    if(LocalDateTime.now().getMonthValue() == month) {
-                        customCalendar.setDate(calendar, arr[0]);
-                    }
-                }
-            });
+                            arr[0].put(Integer.parseInt(key), occupancy);
+                        }
+
+                        // Put the new array
+                        maps.put(month - 1, arr);
+
+                        // Set month dates to the calendar
+                        if (LocalDateTime.now().getMonthValue() == month) {
+                            customCalendar.setDate(calendar, arr[0]);
+                        }
+                    });
         }
 
         // Initialize description hashmap

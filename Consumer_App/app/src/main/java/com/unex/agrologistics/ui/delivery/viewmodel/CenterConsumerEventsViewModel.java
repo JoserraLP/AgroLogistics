@@ -12,7 +12,7 @@ import com.unex.agrologistics.model.ProducerEvent;
 
 import java.util.List;
 
-public class CenterProducerEventsViewModel extends AndroidViewModel {
+public class CenterConsumerEventsViewModel extends AndroidViewModel {
 
     // Consumer event repository
     ConsumerEventRepository mRepository;
@@ -29,7 +29,7 @@ public class CenterProducerEventsViewModel extends AndroidViewModel {
      * EventsViewModel constructor
      * @param application Application
      */
-    public CenterProducerEventsViewModel(Application application) {
+    public CenterConsumerEventsViewModel(Application application) {
         super(application);
         // Get repository instance
         mRepository = ConsumerEventRepository.getInstance(application);

@@ -14,14 +14,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.unex.agrologistics.R;
 import com.unex.agrologistics.model.ConsumerEvent;
-import com.unex.agrologistics.model.ProducerEvent;
 import com.unex.agrologistics.model.Product;
-import com.unex.agrologistics.ui.delivery.viewmodel.CenterProducerEventsViewModel;
+import com.unex.agrologistics.ui.delivery.viewmodel.CenterConsumerEventsViewModel;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
 import com.unex.agrologistics.ui.delivery.viewmodel.ProductsViewModel;
 
@@ -103,8 +101,8 @@ public class DeliveryDetailsFragment extends Fragment {
         });
 
         // Get the CenterProducerEventsViewModel
-        CenterProducerEventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(
-                CenterProducerEventsViewModel.class);
+        CenterConsumerEventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(
+                CenterConsumerEventsViewModel.class);
 
         // Define on click for confirmation
         button.setOnClickListener(v -> {

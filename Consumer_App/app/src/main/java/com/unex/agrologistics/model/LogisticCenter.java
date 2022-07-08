@@ -4,17 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName="logistic_center", primaryKeys = {"id", "email"})
+@Entity(tableName="logistic_center")
 public class LogisticCenter {
 
     // Logistic Center attributes
     @SerializedName("id")
     @Expose
     @ColumnInfo(name = "id")
+    @PrimaryKey
     private int id;
 
     @SerializedName("name")

@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
+import com.unex.agrologistics.data.repository.ConsumerEventRepository;
 import com.unex.agrologistics.model.LogisticCenter;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
 
@@ -41,6 +42,12 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
         this.context = context;
         this.data = new ArrayList<>();
         this.centersViewModel = centersViewModel;
+
+        // Load consumer events
+        // Repository to load data
+        ConsumerEventRepository consumerEventRepository =
+                ConsumerEventRepository.getInstance(this.centersViewModel.getApplication());
+        consumerEventRepository.loadConsumerEvents();
     }
 
     /**
@@ -66,7 +73,7 @@ public class ListCentersAdapter extends RecyclerView.Adapter<ListCentersAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ListCentersAdapter.ViewHolder holder, final int position) {
-        // Get the producer events item
+        // Get the consumer events item
         LogisticCenter logisticCenterItem = data.get(position);
 
         // Set values on UI fields

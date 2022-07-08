@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
 import com.unex.agrologistics.model.ConsumerEvent;
-import com.unex.agrologistics.model.ProducerEvent;
 import com.unex.agrologistics.ui.delivery.ListHoursAdapter;
-import com.unex.agrologistics.ui.delivery.viewmodel.CenterProducerEventsViewModel;
+import com.unex.agrologistics.ui.delivery.viewmodel.CenterConsumerEventsViewModel;
 import com.unex.agrologistics.ui.delivery.viewmodel.CentersViewModel;
 
 import java.text.ParseException;
@@ -48,8 +47,8 @@ public class DeliveryHourFragment extends Fragment {
         TextView logisticCenterName = root.findViewById(R.id.logisticCenterName);
 
         // Get the CenterProducerEventsViewModel
-        CenterProducerEventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(
-                CenterProducerEventsViewModel.class);
+        CenterConsumerEventsViewModel eventsViewModel = new ViewModelProvider(requireActivity()).get(
+                CenterConsumerEventsViewModel.class);
 
         // Get the CentersViewModel
         CentersViewModel centersViewModel = new ViewModelProvider(requireActivity()).get(

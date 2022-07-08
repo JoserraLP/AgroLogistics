@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.unex.agrologistics.R;
 import com.unex.agrologistics.model.ConsumerEvent;
-import com.unex.agrologistics.model.ProducerEvent;
 import com.unex.agrologistics.ui.delivery.view.DeliveryHourFragment;
-import com.unex.agrologistics.ui.delivery.viewmodel.CenterProducerEventsViewModel;
+import com.unex.agrologistics.ui.delivery.viewmodel.CenterConsumerEventsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class ListHoursAdapter extends RecyclerView.Adapter<ListHoursAdapter.View
     private ArrayList<DeliveryHourFragment.Hour> data;
 
     // CenterProducerEventsViewModel to retrieve the information
-    private CenterProducerEventsViewModel eventsViewModel;
+    private CenterConsumerEventsViewModel eventsViewModel;
 
     // Adapter context
     private Context context;
@@ -36,7 +35,7 @@ public class ListHoursAdapter extends RecyclerView.Adapter<ListHoursAdapter.View
      * ListHoursAdapter constructor
      * @param context Adapter context
      */
-    public ListHoursAdapter(Context context, CenterProducerEventsViewModel eventsViewModel) {
+    public ListHoursAdapter(Context context, CenterConsumerEventsViewModel eventsViewModel) {
         // Initialize local variables
         this.context = context;
         this.data = new ArrayList<>();

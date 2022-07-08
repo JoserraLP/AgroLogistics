@@ -9,7 +9,9 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName="estimated_stock",foreignKeys = {
+@Entity(tableName="estimated_stock",
+        primaryKeys = { "id", "product_id", "logistic_center_id"},
+        foreignKeys = {
         @ForeignKey(entity = Product.class, parentColumns = "id", childColumns = "product_id"),
         @ForeignKey(entity = LogisticCenter.class, parentColumns = "id", childColumns = "logistic_center_id")})
 
@@ -18,7 +20,6 @@ public class EstimatedStock {
     // Estimated Stock attributes
     @SerializedName("id")
     @Expose
-    @PrimaryKey
     @ColumnInfo(name = "id")
     private int id;
 
@@ -174,5 +175,17 @@ public class EstimatedStock {
      */
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "EstimatedStock{" +
+                "id=" + id +
+                ", product_id=" + product_id +
+                ", logistic_center_id=" + logistic_center_id +
+                ", product_category='" + product_category + '\'' +
+                ", amount_kg=" + amount_kg +
+                ", date='" + date + '\'' +
+                '}';
     }
 }
