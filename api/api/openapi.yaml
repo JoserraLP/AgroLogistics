@@ -2095,6 +2095,14 @@ paths:
         schema:
           type: string
         style: form
+      - description: Last record
+        explode: true
+        in: query
+        name: last_record
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         200:
           content:

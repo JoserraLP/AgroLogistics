@@ -8,9 +8,10 @@ public class Constants {
     // public static String AGROLOGISTICS_API_SERVER_URL = "http://158.49.191.108:8080/";
     // public static String AGROLOGISTICS_API_SERVER_URL = "http://192.168.1.86:8080/";
     // public static String AGROLOGISTICS_API_SERVER_URL = "http://158.49.189.254:8080/";
-    // public static String AGROLOGISTICS_API_SERVER_URL = "http://192.168.1.140:8080/";
+    public static String AGROLOGISTICS_API_SERVER_URL = "http://192.168.1.140:8080/";
     // public static String AGROLOGISTICS_API_SERVER_URL = "http://192.168.1.91:8080/";
-    public static String AGROLOGISTICS_API_SERVER_URL = "http://158.49.190.64:8080/";
+    //public static String AGROLOGISTICS_API_SERVER_URL = "http://192.168.1.92:8080/";
+    // public static String AGROLOGISTICS_API_SERVER_URL = "http://158.49.190.64:8080/";
     // public static String AGROLOGISTICS_API_SERVER_URL = "http://192.168.1.87:8080/";
 
     /** Preferences **/

@@ -49,6 +49,7 @@ module.exports.getEstimatedStock = function(req, res, next) {
     var logistic_center_id = req.logistic_center_id.originalValue;
     var product_id = req.product_id.originalValue;
     var product_category = req.product_category.originalValue;
+    var last_record = req.last_record.originalValue;
 
     var query = "SELECT estimated_stock.id, estimated_stock.product_id, product.name AS product_name, estimated_stock.logistic_center_id, "
                 + "logistic_center.name AS logistic_center_name, estimated_stock.product_category, estimated_stock.amount_kg, estimated_stock.date "
@@ -57,12 +58,17 @@ module.exports.getEstimatedStock = function(req, res, next) {
 
     var conditions = [];
 
-    if (day != undefined && month != undefined && year != undefined){
-        conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month + " AND DAY(date) = " + day);
-    } else if (month != undefined && year != undefined){
-        conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month);
-    } else if (year != undefined){
-        conditions.push(" YEAR(date) = '" + year + "'");
+    if (last_record === 'true'){
+        query = "SELECT * FROM estimated_stock";
+    } else{
+
+        if (day != undefined && month != undefined && year != undefined){
+            conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month + " AND DAY(date) = " + day);
+        } else if (month != undefined && year != undefined){
+            conditions.push(" YEAR(date) = '" + year + "' AND MONTH(date) = " + month);
+        } else if (year != undefined){
+            conditions.push(" YEAR(date) = '" + year + "'");
+        }
     }
 
     if (logistic_center_id != undefined)  conditions.push(" logistic_center_id = " + logistic_center_id);
@@ -74,6 +80,12 @@ module.exports.getEstimatedStock = function(req, res, next) {
     if (conditions.length > 0){
         query = query + " WHERE " + conditions.join(" AND ");
     }
+
+    if (last_record === 'true'){
+        query = query + " AND DATE(date) < '" + year + '-' + month + '-' + day + "' ORDER BY date desc LIMIT 1";
+    }
+
+    console.log(query);
 
     if (query){
         // Execute query
